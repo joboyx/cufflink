@@ -1,6 +1,6 @@
 # Jira Link Copy
 
-Chrome extension that copies a formatted Jira issue link from the current tab.
+Chrome extension that copies a formatted Jira issue or GitLab merge request link from the current tab.
 
 ## Install
 
@@ -18,8 +18,9 @@ Release page: https://github.com/joboyx/jira-link-copy/releases/latest
 ## What it copies
 
 - Rich text (normal paste): `ABC-123: Summary` as a link to `https://<host>/browse/ABC-123`
-- Plain text (paste as plain text): `ABC-123: Summary` with no hyperlink
-- A label longer than 80 characters is cut and ends with `…`. The link target stays the full URL.
+- Rich text on a merge request: `my-service!42 | Title` as a link to `https://<host>/group/subgroup/my-service/-/merge_requests/42`
+- Plain text (paste as plain text): the same label with no hyperlink
+- A label longer than 100 characters gets a cut title that ends with `…`. The `ABC-123` or `my-service!42` part is never cut, and the link target stays the full URL.
 
 Paste as plain text:
 
@@ -27,12 +28,13 @@ Paste as plain text:
 - macOS Cocoa apps: Option-Shift-Command-V (Paste and Match Style)
 - Google Docs and similar web apps: Command-Shift-V (paste without formatting)
 
-The extension reads the issue on:
+The extension reads the issue or merge request on:
 
 - an issue page (`/browse/ABC-123`)
 - a board when a card is selected or focused
+- a GitLab merge request page, any tab (`/<project path>/-/merge_requests/42`), on gitlab.com or a self-managed host
 
-The copied URL is always the browse URL for that issue, not the board URL.
+The copied URL is always the browse URL for that issue, not the board URL. For a merge request it is the overview URL, without the tab, query or anchor.
 
 After each copy, a card in the bottom-right corner shows the result. It uses the Tokyo Night colors on a dark page and Tokyo Day on a light page.
 

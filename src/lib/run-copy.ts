@@ -1,25 +1,26 @@
-import { copyIssueLink } from './clipboard';
-import { detectIssue } from './detect-issue';
+import { copyLink } from './clipboard';
+import { detectCopyLink } from './detect-copy-link';
 import { formatLinkLabel } from './format-link';
 import { showToast } from './toast';
 
 /**
- * Detects the Jira issue on this tab, copies a formatted link, and shows a card.
+ * Detects the Jira issue or GitLab merge request on this tab, copies a formatted
+ * link, and shows a card.
  */
-export async function copyCurrentIssue(): Promise<void> {
-  const issue = detectIssue(document, location.href);
-  if (!issue) {
+export async function copyCurrentLink(): Promise<void> {
+  const link = detectCopyLink(document, location.href);
+  if (!link) {
     showToast({
       kind: 'error',
       kicker: 'Not found',
-      title: 'No Jira issue on this page',
-      body: 'Open an issue, or select a card on a board.',
+      title: 'No Jira issue or merge request on this page',
+      body: 'Open an issue or a merge request, or select a card on a board.',
     });
     return;
   }
 
   try {
-    await copyIssueLink(issue);
+    await copyLink(link);
   } catch {
     showToast({
       kind: 'error',
@@ -32,7 +33,7 @@ export async function copyCurrentIssue(): Promise<void> {
   showToast({
     kind: 'success',
     kicker: 'Copied',
-    title: formatLinkLabel(issue),
-    body: issue.browseUrl,
+    title: formatLinkLabel(link),
+    body: link.url,
   });
 }

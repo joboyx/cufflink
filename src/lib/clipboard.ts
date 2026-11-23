@@ -1,12 +1,12 @@
-import type { JiraIssue } from './format-link';
+import type { CopyLink } from './format-link';
 import { formatHtml, formatPlainText } from './format-link';
 
 /**
  * Writes a rich HTML link and a plain-text label to the clipboard.
  */
-export async function copyIssueLink(issue: JiraIssue): Promise<void> {
-  const html = formatHtml(issue);
-  const text = formatPlainText(issue);
+export async function copyLink(link: CopyLink): Promise<void> {
+  const html = formatHtml(link);
+  const text = formatPlainText(link);
 
   if (canWriteClipboardItems()) {
     try {
