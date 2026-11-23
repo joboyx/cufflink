@@ -14,7 +14,7 @@ describe('detectGitLabMr', () => {
       prefix: 'project!42',
       title: 'Add retry to upload',
       url: 'https://gitlab.com/group/project/-/merge_requests/42',
-      separator: ' · ',
+      separator: ' | ',
     });
   });
 
@@ -38,7 +38,7 @@ describe('detectGitLabMr', () => {
       prefix: 'my-service!42',
       title: 'Add retry to upload',
       url: 'https://gitlab.com/group/subgroup/my-service/-/merge_requests/42',
-      separator: ' · ',
+      separator: ' | ',
     });
   });
 
@@ -51,7 +51,7 @@ describe('detectGitLabMr', () => {
       prefix: 'project!7',
       title: 'Add retry to upload',
       url: 'https://gitlab.example.com/group/project/-/merge_requests/7',
-      separator: ' · ',
+      separator: ' | ',
     });
   });
 

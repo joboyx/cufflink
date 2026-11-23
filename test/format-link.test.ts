@@ -31,8 +31,8 @@ describe('formatLinkLabel', () => {
     expect(formatLinkLabel({ ...issue, title: '  ' })).toBe('ABC-12');
   });
 
-  it('joins a merge request prefix and title with a middle dot', () => {
-    expect(formatLinkLabel(mergeRequest)).toBe('my-service!42 · Add retry to upload');
+  it('joins a merge request prefix and title with a vertical bar', () => {
+    expect(formatLinkLabel(mergeRequest)).toBe('my-service!42 | Add retry to upload');
   });
 
   it('uses the merge request prefix when the title is blank', () => {
@@ -59,23 +59,23 @@ describe('label length cap', () => {
   });
 
   it('cuts only the title of a merge request label', () => {
-    // 'my-service!42 · ' is 16 characters, so 85 x give 101 characters.
+    // 'my-service!42 | ' is 16 characters, so 85 x give 101 characters.
     const label = formatLinkLabel({ ...mergeRequest, title: 'x'.repeat(85) });
     expect(label).toHaveLength(100);
-    expect(label).toBe(`my-service!42 · ${'x'.repeat(83)}…`);
+    expect(label).toBe(`my-service!42 | ${'x'.repeat(83)}…`);
   });
 
   it('keeps a long prefix whole and cuts the title to fit', () => {
     const prefix = `${'p'.repeat(57)}!42`;
     const label = formatLinkLabel({ ...mergeRequest, prefix, title: 'x'.repeat(100) });
     expect(label).toHaveLength(100);
-    expect(label).toBe(`${prefix} · ${'x'.repeat(36)}…`);
+    expect(label).toBe(`${prefix} | ${'x'.repeat(36)}…`);
   });
 
   it('keeps a prefix longer than the cap whole and replaces the title with the ellipsis', () => {
     const prefix = `${'p'.repeat(110)}!42`;
     const label = formatLinkLabel({ ...mergeRequest, prefix, title: 'Add retry to upload' });
-    expect(label).toBe(`${prefix} · …`);
+    expect(label).toBe(`${prefix} | …`);
   });
 
   it('puts the same cut label in plain text and HTML, and keeps the full href', () => {
@@ -137,7 +137,7 @@ describe('formatHtml', () => {
 
   it('returns a merge request anchor tag', () => {
     expect(formatHtml(mergeRequest)).toBe(
-      '<a href="https://gitlab.example.com/group/subgroup/my-service/-/merge_requests/42">my-service!42 · Add retry to upload</a>',
+      '<a href="https://gitlab.example.com/group/subgroup/my-service/-/merge_requests/42">my-service!42 | Add retry to upload</a>',
     );
   });
 

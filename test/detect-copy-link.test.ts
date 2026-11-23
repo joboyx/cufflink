@@ -13,7 +13,7 @@ describe('detectCopyLink', () => {
       prefix: 'project!42',
       title: 'feat(ABC-12): add retry to upload',
       url: 'https://gitlab.example.com/group/project/-/merge_requests/42',
-      separator: ' · ',
+      separator: ' | ',
     });
   });
 

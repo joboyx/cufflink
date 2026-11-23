@@ -18,7 +18,7 @@ Release page: https://github.com/joboyx/jira-link-copy/releases/latest
 ## What it copies
 
 - Rich text (normal paste): `ABC-123: Summary` as a link to `https://<host>/browse/ABC-123`
-- Rich text on a merge request: `my-service!42 · Title` as a link to `https://<host>/group/subgroup/my-service/-/merge_requests/42`
+- Rich text on a merge request: `my-service!42 | Title` as a link to `https://<host>/group/subgroup/my-service/-/merge_requests/42`
 - Plain text (paste as plain text): the same label with no hyperlink
 - A label longer than 100 characters gets a cut title that ends with `…`. The `ABC-123` or `my-service!42` part is never cut, and the link target stays the full URL.
 

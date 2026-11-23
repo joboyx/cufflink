@@ -28,9 +28,9 @@ export interface CopyLink {
 export const JIRA_SEPARATOR = ': ';
 
 /**
- * Separator of a merge request label: `my-service!42 · Title` (U+00B7 with spaces).
+ * Separator of a merge request label: `my-service!42 | Title`.
  */
-export const MERGE_REQUEST_SEPARATOR = ' · ';
+export const MERGE_REQUEST_SEPARATOR = ' | ';
 
 /**
  * Most visible characters a copied link label may have, including the ellipsis.
