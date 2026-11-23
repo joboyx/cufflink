@@ -1,5 +1,5 @@
 import { findIssueKey } from './issue-key';
-import type { JiraIssue } from './format-link';
+import { JIRA_SEPARATOR, type CopyLink } from './format-link';
 
 const BROWSE_PATH_PATTERN = /\/(?:jira\/)?browse\/([A-Z][A-Z0-9]+-\d+)/;
 const ISSUES_PATH_PATTERN = /\/issues\/([A-Z][A-Z0-9]+-\d+)/;
@@ -14,7 +14,7 @@ const SUMMARY_SELECTORS = [
 /**
  * Finds the Jira issue on a browse page or a board with a selected/focused card.
  */
-export function detectIssue(doc: Document, pageUrl: string): JiraIssue | null {
+export function detectIssue(doc: Document, pageUrl: string): CopyLink | null {
   const url = parseUrl(pageUrl);
   if (!url) {
     return null;
@@ -29,11 +29,11 @@ export function detectIssue(doc: Document, pageUrl: string): JiraIssue | null {
     return null;
   }
 
-  const summary = summaryFromDocument(doc, key);
   return {
-    key,
-    summary,
-    browseUrl: `${url.origin}/browse/${key}`,
+    prefix: key,
+    title: summaryFromDocument(doc, key),
+    url: `${url.origin}/browse/${key}`,
+    separator: JIRA_SEPARATOR,
   };
 }
 

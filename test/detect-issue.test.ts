@@ -1,10 +1,5 @@
 import { detectIssue, keyFromUrl, summaryFromDocument } from '../src/lib/detect-issue';
-
-function load(html: string, title = ''): Document {
-  document.body.innerHTML = html;
-  document.title = title;
-  return document;
-}
+import { load } from './load-document';
 
 describe('keyFromUrl', () => {
   it('reads a browse path', () => {
@@ -39,9 +34,10 @@ describe('detectIssue', () => {
       `<h1 data-testid="issue.views.issue-base.foundation.summary.heading">Reset password flow</h1>`,
     );
     expect(detectIssue(doc, 'https://jira.example.com/browse/ABC-12')).toEqual({
-      key: 'ABC-12',
-      summary: 'Reset password flow',
-      browseUrl: 'https://jira.example.com/browse/ABC-12',
+      prefix: 'ABC-12',
+      title: 'Reset password flow',
+      url: 'https://jira.example.com/browse/ABC-12',
+      separator: ': ',
     });
   });
 
@@ -54,9 +50,10 @@ describe('detectIssue', () => {
       'https://jira.example.com/jira/software/projects/ABC/boards/7?selectedIssue=ABC-9',
     );
     expect(issue).toEqual({
-      key: 'ABC-9',
-      summary: 'Board sidebar title',
-      browseUrl: 'https://jira.example.com/browse/ABC-9',
+      prefix: 'ABC-9',
+      title: 'Board sidebar title',
+      url: 'https://jira.example.com/browse/ABC-9',
+      separator: ': ',
     });
   });
 
@@ -67,9 +64,10 @@ describe('detectIssue', () => {
       </div>
     `);
     expect(detectIssue(doc, 'https://jira.example.com/secure/RapidBoard.jspa')).toEqual({
-      key: 'ABC-9',
-      summary: 'Selected card title',
-      browseUrl: 'https://jira.example.com/browse/ABC-9',
+      prefix: 'ABC-9',
+      title: 'Selected card title',
+      url: 'https://jira.example.com/browse/ABC-9',
+      separator: ': ',
     });
   });
 
@@ -81,9 +79,10 @@ describe('detectIssue', () => {
     expect(
       detectIssue(doc, 'https://jira.example.com/jira/software/projects/ABC/boards/1'),
     ).toEqual({
-      key: 'ABC-5',
-      summary: 'From breadcrumb page',
-      browseUrl: 'https://jira.example.com/browse/ABC-5',
+      prefix: 'ABC-5',
+      title: 'From breadcrumb page',
+      url: 'https://jira.example.com/browse/ABC-5',
+      separator: ': ',
     });
   });
 
@@ -96,9 +95,10 @@ describe('detectIssue', () => {
     expect(
       detectIssue(doc, 'https://jira.example.com/jira/software/projects/ABC/boards/1'),
     ).toEqual({
-      key: 'ABC-8',
-      summary: 'Aria selected title',
-      browseUrl: 'https://jira.example.com/browse/ABC-8',
+      prefix: 'ABC-8',
+      title: 'Aria selected title',
+      url: 'https://jira.example.com/browse/ABC-8',
+      separator: ': ',
     });
   });
 
@@ -107,9 +107,10 @@ describe('detectIssue', () => {
       <div class="ghx-issue ghx-selected" data-issue-key="ABC-8" aria-label="Label only card"></div>
     `);
     expect(detectIssue(doc, 'https://jira.example.com/secure/RapidBoard.jspa')).toEqual({
-      key: 'ABC-8',
-      summary: 'Label only card',
-      browseUrl: 'https://jira.example.com/browse/ABC-8',
+      prefix: 'ABC-8',
+      title: 'Label only card',
+      url: 'https://jira.example.com/browse/ABC-8',
+      separator: ': ',
     });
   });
 
@@ -118,9 +119,10 @@ describe('detectIssue', () => {
       <div class="ghx-issue ghx-selected">ABC-11 Plain text card</div>
     `);
     expect(detectIssue(doc, 'https://jira.example.com/secure/RapidBoard.jspa')).toEqual({
-      key: 'ABC-11',
-      summary: 'Plain text card',
-      browseUrl: 'https://jira.example.com/browse/ABC-11',
+      prefix: 'ABC-11',
+      title: 'Plain text card',
+      url: 'https://jira.example.com/browse/ABC-11',
+      separator: ': ',
     });
   });
 
@@ -136,18 +138,20 @@ describe('detectIssue', () => {
     expect(
       detectIssue(doc, 'https://jira.example.com/jira/software/projects/ABC/boards/1'),
     ).toEqual({
-      key: 'ABC-7',
-      summary: 'Focused card title',
-      browseUrl: 'https://jira.example.com/browse/ABC-7',
+      prefix: 'ABC-7',
+      title: 'Focused card title',
+      url: 'https://jira.example.com/browse/ABC-7',
+      separator: ': ',
     });
   });
 
   it('falls back to the document title', () => {
     const doc = load('', '[ABC-3] Title from tab - Jira');
     expect(detectIssue(doc, 'https://host.example/browse/ABC-3')).toEqual({
-      key: 'ABC-3',
-      summary: 'Title from tab',
-      browseUrl: 'https://host.example/browse/ABC-3',
+      prefix: 'ABC-3',
+      title: 'Title from tab',
+      url: 'https://host.example/browse/ABC-3',
+      separator: ': ',
     });
   });
 

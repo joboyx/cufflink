@@ -1,12 +1,14 @@
-import { copyIssueLink } from '../src/lib/clipboard';
+import { copyLink } from '../src/lib/clipboard';
+import { JIRA_SEPARATOR } from '../src/lib/format-link';
 
 const issue = {
-  key: 'ABC-12',
-  summary: 'Reset password flow',
-  browseUrl: 'https://jira.example.com/browse/ABC-12',
+  prefix: 'ABC-12',
+  title: 'Reset password flow',
+  url: 'https://jira.example.com/browse/ABC-12',
+  separator: JIRA_SEPARATOR,
 };
 
-describe('copyIssueLink', () => {
+describe('copyLink', () => {
   const originalClipboard = navigator.clipboard;
   const originalClipboardItem = globalThis.ClipboardItem;
   const originalBlob = globalThis.Blob;
@@ -50,7 +52,7 @@ describe('copyIssueLink', () => {
       },
     });
 
-    await copyIssueLink(issue);
+    await copyLink(issue);
 
     expect(written['text/plain']).toBe('ABC-12: Reset password flow');
     expect(written['text/html']).toBe(
@@ -83,7 +85,7 @@ describe('copyIssueLink', () => {
       return false;
     };
 
-    await copyIssueLink(issue);
+    await copyLink(issue);
     expect(copied).toBe('ABC-12: Reset password flow');
   });
 
@@ -93,6 +95,6 @@ describe('copyIssueLink', () => {
       value: undefined,
     });
     document.execCommand = () => false;
-    await expect(copyIssueLink(issue)).rejects.toThrow('Clipboard write failed');
+    await expect(copyLink(issue)).rejects.toThrow('Clipboard write failed');
   });
 });
