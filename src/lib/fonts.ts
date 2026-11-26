@@ -4,13 +4,13 @@ import { browser, type PublicPath } from 'wxt/browser';
  * Font family name of the bundled JetBrains Mono 500 face.
  * The prefix keeps it from clashing with a font that the page declares.
  */
-export const MONO_FAMILY = 'CuffLinkJetBrains Mono';
+export const MONO_FAMILY = 'cufflink JetBrains Mono';
 
 /**
  * Font family name of the bundled IBM Plex Sans 400 face.
  * The prefix keeps it from clashing with a font that the page declares.
  */
-export const SANS_FAMILY = 'CuffLinkIBM Plex Sans';
+export const SANS_FAMILY = 'cufflink IBM Plex Sans';
 
 interface FaceSpec {
   family: string;

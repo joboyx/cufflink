@@ -79,10 +79,10 @@ describe('showToast', () => {
     showToast(success);
 
     expect(styleText()).toContain(
-      'font-family: "CuffLinkJetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;',
+      'font-family: "cufflink JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;',
     );
     expect(styleText()).toContain(
-      'font-family: "CuffLinkIBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;',
+      'font-family: "cufflink IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;',
     );
   });
 

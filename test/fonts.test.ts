@@ -72,8 +72,8 @@ describe('loadToastFonts', () => {
       'chrome-extension://id/fonts/ibm-plex-sans-latin-400-normal.woff2',
     ]);
     expect(registered.map(({ family, weight, style }) => ({ family, weight, style }))).toEqual([
-      { family: 'CuffLinkJetBrains Mono', weight: '500', style: 'normal' },
-      { family: 'CuffLinkIBM Plex Sans', weight: '400', style: 'normal' },
+      { family: 'cufflink JetBrains Mono', weight: '500', style: 'normal' },
+      { family: 'cufflink IBM Plex Sans', weight: '400', style: 'normal' },
     ]);
   });
 
@@ -88,15 +88,15 @@ describe('loadToastFonts', () => {
   });
 
   it('skips a family that the page document already has, even when quoted', async () => {
-    registered.push({ family: '"CuffLinkJetBrains Mono"', weight: '500', style: 'normal' });
+    registered.push({ family: '"cufflink JetBrains Mono"', weight: '500', style: 'normal' });
     const { loadToastFonts } = await import('../src/lib/fonts');
 
     await loadToastFonts();
 
     expect(fetched).toEqual(['chrome-extension://id/fonts/ibm-plex-sans-latin-400-normal.woff2']);
     expect(registered.map((face) => face.family)).toEqual([
-      '"CuffLinkJetBrains Mono"',
-      'CuffLinkIBM Plex Sans',
+      '"cufflink JetBrains Mono"',
+      'cufflink IBM Plex Sans',
     ]);
   });
 
