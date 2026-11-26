@@ -63,13 +63,13 @@ export function showToast(input: ToastInput): void {
 }
 
 const TOKEN_PROPERTIES: Readonly<Record<keyof ThemeTokens, string>> = {
-  panel: '--jlc-panel',
-  fg: '--jlc-fg',
-  fg2: '--jlc-fg2',
-  border: '--jlc-border',
-  accent: '--jlc-accent',
-  red: '--jlc-red',
-  shadow: '--jlc-shadow',
+  panel: '--cufflink-panel',
+  fg: '--cufflink-fg',
+  fg2: '--cufflink-fg2',
+  border: '--cufflink-border',
+  accent: '--cufflink-accent',
+  red: '--cufflink-red',
+  shadow: '--cufflink-shadow',
 };
 
 function tokenDeclarations(theme: ThemeName): string {
@@ -88,16 +88,16 @@ function toastCss(theme: ThemeName): string {
       min-width: 220px;
       max-width: 360px;
       padding: 14px 16px 12px;
-      background: var(--jlc-panel);
-      color: var(--jlc-fg);
-      border: 1px solid var(--jlc-border);
+      background: var(--cufflink-panel);
+      color: var(--cufflink-fg);
+      border: 1px solid var(--cufflink-border);
       border-radius: 8px;
-      box-shadow: var(--jlc-shadow);
+      box-shadow: var(--cufflink-shadow);
       transform: translateY(8px);
       animation: rise 180ms ease-out forwards;
     }
     .card-error {
-      border-color: var(--jlc-red);
+      border-color: var(--cufflink-red);
     }
     .kicker {
       font-family: ${MONO_STACK};
@@ -105,23 +105,23 @@ function toastCss(theme: ThemeName): string {
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--jlc-accent);
+      color: var(--cufflink-accent);
       margin-bottom: 6px;
     }
     .card-error .kicker {
-      color: var(--jlc-red);
+      color: var(--cufflink-red);
     }
     .title {
       font-family: ${MONO_STACK};
       font-size: 14px;
       font-weight: 500;
       line-height: 1.35;
-      color: var(--jlc-fg);
+      color: var(--cufflink-fg);
     }
     .body {
       font-family: ${SANS_STACK};
       font-size: 12px;
-      color: var(--jlc-fg2);
+      color: var(--cufflink-fg2);
       margin-top: 6px;
       overflow: hidden;
       text-overflow: ellipsis;

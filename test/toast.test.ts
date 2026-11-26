@@ -51,9 +51,9 @@ describe('showToast', () => {
     expect(card().getAttribute('data-theme')).toBe('tokyo');
     expect(card().getAttribute('role')).toBe('status');
     expect(card().className).toBe('card card-success');
-    expect(styleText()).toContain('--jlc-panel: #1f2335;');
-    expect(styleText()).toContain('--jlc-accent: #7aa2f7;');
-    expect(styleText()).toContain('--jlc-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);');
+    expect(styleText()).toContain('--cufflink-panel: #1f2335;');
+    expect(styleText()).toContain('--cufflink-accent: #7aa2f7;');
+    expect(styleText()).toContain('--cufflink-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);');
   });
 
   it('renders a day card on a light page', () => {
@@ -62,16 +62,16 @@ describe('showToast', () => {
     showToast(success);
 
     expect(card().getAttribute('data-theme')).toBe('day');
-    expect(styleText()).toContain('--jlc-panel: #e9e9ed;');
-    expect(styleText()).toContain('--jlc-red: #c64343;');
+    expect(styleText()).toContain('--cufflink-panel: #e9e9ed;');
+    expect(styleText()).toContain('--cufflink-red: #c64343;');
   });
 
   it('uses only custom properties for colours in the rules', () => {
     showToast(success);
 
-    const rules = styleText().replace(/\.card \{[^}]*--jlc-[^}]*\}/, '');
-    expect(rules).toContain('background: var(--jlc-panel);');
-    expect(rules).toContain('border: 1px solid var(--jlc-border);');
+    const rules = styleText().replace(/\.card \{[^}]*--cufflink-[^}]*\}/, '');
+    expect(rules).toContain('background: var(--cufflink-panel);');
+    expect(rules).toContain('border: 1px solid var(--cufflink-border);');
     expect(rules).not.toMatch(/#[0-9a-f]{3,8}\b/i);
   });
 
@@ -79,10 +79,10 @@ describe('showToast', () => {
     showToast(success);
 
     expect(styleText()).toContain(
-      'font-family: "JLC JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;',
+      'font-family: "CuffLinkJetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;',
     );
     expect(styleText()).toContain(
-      'font-family: "JLC IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;',
+      'font-family: "CuffLinkIBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;',
     );
   });
 
@@ -108,7 +108,7 @@ describe('showToast', () => {
 
     expect(card().className).toBe('card card-error');
     expect(card().querySelector('.body')).toBeNull();
-    expect(styleText()).toMatch(/\.card-error \.kicker \{\s*color: var\(--jlc-red\);/);
+    expect(styleText()).toMatch(/\.card-error \.kicker \{\s*color: var\(--cufflink-red\);/);
   });
 
   it('replaces the previous card', () => {
