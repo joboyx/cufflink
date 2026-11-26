@@ -1,0 +1,27 @@
+name: Feature request
+description: Suggest a new page type, link format or other change.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Do not paste private URLs, issue keys or titles from your company.** Use made-up values, such as `ABC-123` or `octo-org/my-service`.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What do you want to do, and what stops you now?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should the extension do? Give the page URL shape and the label you expect.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Other ways you tried or thought of.
