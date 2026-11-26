@@ -23,8 +23,6 @@ A bare URL turns up to the meeting in pyjamas. Nobody knows what it is until the
 
 Typing a link with its key and title by hand is slow. CuffLink does it with one shortcut. It copies rich text for apps that keep links, and plain text for apps that do not.
 
-![A dark pull request page titled "Add retry to upload #42" in the made-up repo octo-org/my-service. Over the page, a card reads "CUFFED TO CLIPBOARD", then "my-service#42 | Add retry to upload", then the URL "http://git.example.test/octo-org/my-service/pull/42".](docs/images/copied-card.png)
-
 ## What it copies
 
 | Page                      | Label example            | Link target, on the same host           |
@@ -51,6 +49,8 @@ Paste as plain text:
 | Google Docs and similar web apps | Command-Shift-V (paste without formatting)     |
 
 After each copy, a card in the bottom-right corner shows the result. It uses the Tokyo Night colors on a dark page and Tokyo Day on a light page.
+
+![A dark pull request page titled "Add retry to upload #42" in the made-up repo octo-org/my-service. Over the page, a dark card reads "CUFFED TO CLIPBOARD", then "my-service#42 | Add retry to upload", then the URL "http://git.example.test/octo-org/my-service/pull/42".](docs/images/copied-card.png)
 
 ![A light issue page for the made-up issue ABC-123 "Fix login timeout". Over the grey activity area at the bottom, a light card reads "CUFFED TO CLIPBOARD", then "ABC-123: Fix login timeout", then the URL "http://git.example.test/browse/ABC-123".](docs/images/copied-card-jira.png)
 
