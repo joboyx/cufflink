@@ -27,18 +27,19 @@ Typing a link with its key and title by hand is slow. CuffLink does it with one 
 
 ## What it copies
 
-| Page type                                                        | Label example                | Link target                                                                       |
-| ---------------------------------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------- |
-| Jira issue page (`/browse/ABC-123`)                              | `ABC-123: Fix login timeout` | `https://<host>/browse/ABC-123`                                                   |
-| Jira board, with a card selected or focused                      | `ABC-123: Fix login timeout` | `https://<host>/browse/ABC-123`                                                   |
-| GitHub pull request, any tab (`/<owner>/<repo>/pull/42`)         | `my-service#42 \| Title`     | `https://<host>/octo-org/my-service/pull/42`                                      |
-| GitHub issue (`/<owner>/<repo>/issues/42`)                       | `my-service#42 \| Title`     | `https://<host>/octo-org/my-service/issues/42`                                    |
-| GitLab merge request, any tab (`/<project>/-/merge_requests/42`) | `my-service!42 \| Title`     | `https://<host>/group/subgroup/my-service/-/merge_requests/42`                    |
-| GitLab issue (`/<project>/-/issues/42` or `/-/work_items/42`)    | `my-service#42 \| Title`     | `https://<host>/group/subgroup/my-service/-/issues/42` (or `.../-/work_items/42`) |
+| Page                      | Label example            | Link target, on the same host           |
+| ------------------------- | ------------------------ | --------------------------------------- |
+| Jira issue                | `ABC-123: Title`         | `/browse/ABC-123`                       |
+| Jira board, selected card | `ABC-123: Title`         | `/browse/ABC-123`                       |
+| GitHub pull request       | `my-service#42 \| Title` | `/octo-org/my-service/pull/42`          |
+| GitHub issue              | `my-service#42 \| Title` | `/octo-org/my-service/issues/42`        |
+| GitLab merge request      | `my-service!42 \| Title` | `/group/my-service/-/merge_requests/42` |
+| GitLab issue              | `my-service#42 \| Title` | `/group/my-service/-/issues/42`         |
+| GitLab work item          | `my-service#42 \| Title` | `/group/my-service/-/work_items/42`     |
 
 - **Rich text and plain text.** A normal paste gives the label as a link. Paste as plain text gives the same label with no link.
 - **Any host.** CuffLink matches the URL path, not the host. It works on github.com and GitHub Enterprise, and on gitlab.com and self-managed GitLab.
-- **Clean URLs.** For a Jira issue, the link is always the browse URL, not the board URL. For a pull request, merge request or issue, it is the overview URL, without the tab, query or anchor.
+- **Clean URLs.** For a Jira issue, the link is always the browse URL, not the board URL. On a board, CuffLink uses the selected or focused card. From any tab of a pull request, merge request or issue, the link is the overview URL, without the tab, query or anchor.
 - **Long titles.** A label longer than 100 characters gets a cut title that ends with `…`. The `ABC-123`, `my-service!42` or `my-service#42` part is never cut, and the link target stays the full URL.
 
 Paste as plain text:
