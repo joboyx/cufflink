@@ -1,9 +1,10 @@
 /**
  * Renders the extension icons in `public/icon/` from the SVG logo in `assets/`.
  *
- * The 16 and 32 px toolbar icons come from `assets/icon-small.svg`, a simpler drawing with a
- * thicker rim and a larger slot, so that the two links stay clear at toolbar size. The 48 and
- * 128 px icons come from the full logo, `assets/icon.svg`.
+ * The 16 and 32 px toolbar icons come from `assets/icon-small.svg`, a simpler drawing with
+ * larger links, a thicker navy band, a larger slot and a gap where the links cross, so that the
+ * two links stay clear at toolbar size. The 48 and 128 px icons come from the full logo,
+ * `assets/icon.svg`.
  *
  * Run `node scripts/generate-icons.mjs` after a change to either SVG, and commit the PNGs.
  */

@@ -51,7 +51,7 @@ Run from the repo root.
 - The title comes from the page heading, else from the tab title without the site suffix. A blank title gives a label with only the prefix.
 - A group-level GitLab work item (`/groups/<group>/-/work_items/<iid>`) is not matched.
 - Card text (`src/lib/run-copy.ts`): a copy shows the kicker `Cuffed to clipboard`, the label and the URL. No match: kicker `Nothing to cuff`, title `No issue, pull request or merge request on this page`. A failed clipboard write: kicker `Copy failed`, title `Could not write to the clipboard`. Puns stay in the kickers only; error text stays plain. A tab where Chrome blocks injection: a red `!` badge on the icon for 2 seconds.
-- Icons: `scripts/generate-icons.mjs` renders the SVGs with `@resvg/resvg-js`. `public/icon/16.png` and `32.png` come from `assets/icon-small.svg` (thicker rim, larger slot, no gloss, no slot bevel); `48.png` and `128.png` come from `assets/icon.svg`. After an SVG change, run the script, check each PNG by eye on a light and a dark toolbar, and commit the PNGs.
+- Icons: `scripts/generate-icons.mjs` renders the SVGs with `@resvg/resvg-js`. `public/icon/16.png` and `32.png` come from `assets/icon-small.svg` (larger links that fill the square, a navy band of at least 2 px at 16 px, a larger slot, a see-through gap where the links cross, no gloss, no slot bevel); `48.png` and `128.png` come from `assets/icon.svg`. After an SVG change, run the script, check each PNG by eye on a light and a dark toolbar, and commit the PNGs.
 - The clipboard gets `text/html` and `text/plain`. Without `ClipboardItem`, a plain-text fallback runs.
 - Permissions stay `activeTab`, `scripting` and `clipboardWrite`. Do not add host permissions.
 
