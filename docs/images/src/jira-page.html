@@ -1,7 +1,8 @@
 <!doctype html>
 <!--
   Made-up issue tracker page for the light card screenshot.
-  Serve it at /browse/ABC-123/ and follow the verify skill (.agents/skills/verify/SKILL.md).
+  Serve it at /browse/ABC-123/. Steps: "Refresh the README and store images" in CONTRIBUTING.md.
+  A grey activity band and a thin frame give the light shot a visible edge on a white page.
 -->
 <html lang="en">
   <head>
@@ -76,6 +77,48 @@
       dd {
         margin: 0 0 12px;
       }
+      .activity {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 104px;
+        padding: 16px 40px;
+        background: #f1f2f4;
+        border-top: 1px solid #dfe1e6;
+        color: #44546f;
+      }
+      .activity .label {
+        color: #172b4d;
+      }
+      .reply {
+        width: 46%;
+        padding: 8px 12px;
+        border: 1px solid #c1c7d0;
+        border-radius: 4px;
+        background: #fff;
+        color: #626f86;
+      }
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        border: 1px solid #b3b9c4;
+        pointer-events: none;
+      }
+      @media (max-width: 759px) {
+        header {
+          padding: 0 20px;
+        }
+        main {
+          padding: 18px 20px;
+          grid-template-columns: 1fr 150px;
+          gap: 20px;
+        }
+        .activity {
+          padding: 14px 20px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -103,5 +146,9 @@
         </dl>
       </div>
     </main>
+    <section class="activity">
+      <p class="label">Activity</p>
+      <div class="reply">Add a comment…</div>
+    </section>
   </body>
 </html>

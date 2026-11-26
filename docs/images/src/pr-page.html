@@ -1,7 +1,8 @@
 <!doctype html>
 <!--
   Made-up code host pull request page for the card screenshots.
-  Serve it at /octo-org/my-service/pull/42/ and follow the verify skill (.agents/skills/verify/SKILL.md).
+  Serve it at /octo-org/my-service/pull/42/. Steps: "Refresh the README and store images" in CONTRIBUTING.md.
+  Below 760 px wide, the page drops the sidebar so that a tight shot keeps the card large.
 -->
 <html lang="en">
   <head>
@@ -152,6 +153,25 @@
         margin: 0 0 18px;
         padding-bottom: 14px;
         border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 759px) {
+        main {
+          padding: 20px 24px;
+        }
+        header,
+        nav {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        h1 {
+          font-size: 26px;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .side {
+          display: none;
+        }
       }
     </style>
   </head>
