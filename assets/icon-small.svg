@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
   <title>CuffLink</title>
-  <!-- Toolbar drawing for 16 and 32 px: the logo with larger links, a thicker navy band, a larger slot, no gloss and no slot bevel. A see-through gap shows where one link passes over the other. A cream outline and a brighter rim and enamel keep the shape on a dark toolbar. The links are a little larger than the square, so the tips reach into the corners. One unit is 1/8 px at 16 px. -->
+  <!-- Toolbar drawing for 16 and 32 px: the logo with larger links, a thicker navy band, a larger slot, no gloss and no slot bevel. A see-through gap shows where one link passes over the other. A cream outline and a brighter rim and enamel keep the shape on a dark toolbar. The scale lets the rounded tips, outline included, reach into the corners without a cut at the square edge, and keeps the navy band at 2 px at 16 px. One unit is 1/8 px at 16 px. -->
   <defs>
     <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#fff6da"/>
@@ -45,7 +45,7 @@
       </g>
     </mask>
   </defs>
-  <g transform="translate(64 64) rotate(-45) scale(1.05) translate(-76 -35)">
+  <g transform="translate(64 64) rotate(-45) scale(0.94) translate(-76 -35)">
     <g mask="url(#under-right)"><use href="#link" x="58"/></g>
     <g mask="url(#under-left)"><use href="#link"/></g>
   </g>
