@@ -1,6 +1,6 @@
 # Jira Link Copy
 
-Chrome extension. Copies a formatted Jira issue or GitLab merge request link from the current tab.
+Chrome extension. Copies a formatted link to a Jira issue, a GitHub pull request or issue, or a GitLab merge request or issue from the current tab.
 
 ## Testing
 
