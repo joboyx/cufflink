@@ -1,0 +1,220 @@
+<!doctype html>
+<!--
+  Made-up code host pull request page for the card screenshots.
+  Serve it at /octo-org/my-service/pull/42/. Steps: "Refresh the README and store images" in CONTRIBUTING.md.
+  Below 760 px wide, the page drops the sidebar and the comment, so that a tight shot keeps the
+  card large and the card sits over empty page area.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Add retry to upload by sam-dev · Pull Request #42 · octo-org/my-service</title>
+    <style>
+      :root {
+        --bg: #0d1117;
+        --bg2: #151b23;
+        --line: #30363d;
+        --fg: #e6edf3;
+        --muted: #9198a1;
+        --green: #238636;
+        --blue: #4493f8;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          14px/1.5 -apple-system,
+          'Segoe UI',
+          'Noto Sans',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 32px;
+        background: #010409;
+        border-bottom: 1px solid var(--line);
+      }
+      .mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--fg);
+      }
+      .crumb {
+        font-size: 15px;
+      }
+      .crumb b {
+        font-weight: 600;
+      }
+      nav {
+        display: flex;
+        gap: 22px;
+        padding: 0 32px;
+        border-bottom: 1px solid var(--line);
+        background: #010409;
+      }
+      nav span {
+        padding: 10px 0;
+        color: var(--muted);
+      }
+      nav .on {
+        color: var(--fg);
+        border-bottom: 2px solid #f78166;
+      }
+      main {
+        padding: 24px 32px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+        font-weight: 400;
+      }
+      h1 .num {
+        color: var(--muted);
+        font-weight: 300;
+      }
+      .state {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .badge {
+        padding: 5px 12px;
+        border-radius: 999px;
+        background: var(--green);
+        color: #fff;
+        font-weight: 500;
+      }
+      code {
+        padding: 2px 6px;
+        border-radius: 6px;
+        background: rgba(56, 139, 253, 0.15);
+        color: var(--blue);
+        font:
+          12px ui-monospace,
+          'SF Mono',
+          Menlo,
+          monospace;
+      }
+      .tabs {
+        display: flex;
+        gap: 22px;
+        margin: 16px 0 20px;
+        border-bottom: 1px solid var(--line);
+      }
+      .tabs span {
+        padding: 8px 0;
+        color: var(--muted);
+      }
+      .tabs .on {
+        color: var(--fg);
+        border-bottom: 2px solid #f78166;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: 28px;
+      }
+      .comment {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+      .comment .head {
+        padding: 10px 16px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .comment .head b {
+        color: var(--fg);
+      }
+      .comment .text {
+        padding: 14px 16px;
+      }
+      .comment p {
+        margin: 0 0 10px;
+      }
+      .side h3 {
+        margin: 0 0 6px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .side p {
+        margin: 0 0 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (max-width: 759px) {
+        main {
+          padding: 20px 24px;
+        }
+        header,
+        nav {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        h1 {
+          font-size: 26px;
+        }
+        .layout {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="mark"></div>
+      <div class="crumb">octo-org / <b>my-service</b></div>
+    </header>
+    <nav>
+      <span>Code</span><span>Issues</span><span class="on">Pull requests</span><span>Actions</span
+      ><span>Settings</span>
+    </nav>
+    <main>
+      <h1><bdi data-testid="issue-title">Add retry to upload</bdi> <span class="num">#42</span></h1>
+      <div class="state">
+        <span class="badge">Open</span>
+        <span
+          ><b>sam-dev</b> wants to merge 3 commits into <code>main</code> from
+          <code>retry-upload</code></span
+        >
+      </div>
+      <div class="tabs">
+        <span class="on">Conversation</span><span>Commits 3</span><span>Checks 2</span
+        ><span>Files changed 4</span>
+      </div>
+      <div class="layout">
+        <div class="comment">
+          <div class="head"><b>sam-dev</b> commented 2 hours ago</div>
+          <div class="text">
+            <p>
+              Uploads fail when the network drops for a second. This change retries a failed part up
+              to three times, with a short back-off.
+            </p>
+            <p>The retry count is a setting, so a slow network can raise it.</p>
+          </div>
+        </div>
+        <div class="side">
+          <h3>Reviewers</h3>
+          <p>alex-dev</p>
+          <h3>Labels</h3>
+          <p>enhancement</p>
+          <h3>Milestone</h3>
+          <p>v2.4</p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

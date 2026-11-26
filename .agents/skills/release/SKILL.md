@@ -1,6 +1,6 @@
 ---
 name: release
-description: Explains and drives the release of Jira Link Copy. A merge to main releases the next patch automatically; a pull request that raises the package.json version releases that version. Checks the start state, picks the version, watches the tag-release and Release workflows, and checks the GitHub Release and its Chrome zip. Use when asked to release, cut a version, or check why a release did not appear.
+description: Explains and drives the release of CuffLink. A merge to main releases the next patch automatically; a pull request that raises the package.json version releases that version. Checks the start state, picks the version, watches the tag-release and Release workflows, and checks the GitHub Release and its Chrome zip. Use when asked to release, cut a version, or check why a release did not appear.
 ---
 
 # release
@@ -64,7 +64,7 @@ gh run watch <run id> --exit-status
 gh release view --json tagName,assets,url --jq '{tag: .tagName, url: .url, assets: [.assets[].name]}'
 ```
 
-Pass: the tag is the expected `vX.Y.Z`, and the assets list one Chrome zip (`*-chrome.zip`).
+Pass: the tag is the expected `vX.Y.Z`, and the assets list one Chrome zip (`cufflink-X.Y.Z-chrome.zip`).
 
 ## When something fails
 

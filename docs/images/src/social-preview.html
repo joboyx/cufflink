@@ -1,0 +1,269 @@
+<!doctype html>
+<!--
+  Source of docs/images/social-preview.png (1280x640), the GitHub social preview.
+  Rebuild: see "Refresh the README and store images" in CONTRIBUTING.md.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CuffLink social preview</title>
+    <style>
+      @font-face {
+        font-family: 'cufflink Mono';
+        src: url('../../../public/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2');
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: 'cufflink Sans';
+        src: url('../../../public/fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');
+        font-weight: 400;
+      }
+      :root {
+        /* Tokyo Night, as in src/lib/theme.ts */
+        --night: #1a1b26;
+        --night-deep: #16161e;
+        --panel: #1f2335;
+        --border: #3b4261;
+        --fg: #c0caf5;
+        --fg2: #a9b1d6;
+        --comment: #565f89;
+        --blue: #7aa2f7;
+        --red: #f7768e;
+        /* Logo gold and navy, as in assets/icon.svg */
+        --gold: #f0c46e;
+        --gold-hi: #fff3cf;
+        --gold-lo: #c38a37;
+        --navy: #2b3f80;
+        --navy-deep: #1b2552;
+        --mono: 'cufflink Mono', ui-monospace, monospace;
+        --sans: 'cufflink Sans', system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1280px;
+        height: 640px;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        background:
+          /* Shirting pinstripe: a faint diagonal weave. */
+          repeating-linear-gradient(135deg, rgba(122, 162, 247, 0.035) 0 1px, transparent 1px 14px),
+          radial-gradient(ellipse 70% 90% at 22% 50%, #20233a 0%, transparent 70%),
+          linear-gradient(180deg, var(--night) 0%, var(--night-deep) 100%);
+        color: var(--fg);
+        font-family: var(--sans);
+      }
+      /* A cuff seam along the left edge: a navy band with a gold stitch line. */
+      .seam {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 22px;
+        background: linear-gradient(90deg, var(--navy-deep), var(--navy));
+      }
+      .seam::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 6px;
+        border-right: 2px dashed rgba(240, 196, 110, 0.55);
+      }
+      .wrap {
+        position: absolute;
+        inset: 0 0 0 22px;
+        display: grid;
+        grid-template-columns: 470px 1fr;
+        align-items: center;
+        gap: 40px;
+        padding: 0 64px 0 58px;
+      }
+      .brand img {
+        width: 132px;
+        height: 132px;
+        display: block;
+        margin: 0 0 18px -10px;
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
+      }
+      .name {
+        margin: 0;
+        font-family: var(--mono);
+        font-weight: 500;
+        font-size: 78px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: var(--fg);
+      }
+      .name span {
+        background: linear-gradient(
+          135deg,
+          var(--gold-hi) 0%,
+          var(--gold) 40%,
+          var(--gold-lo) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .tagline {
+        margin: 22px 0 0;
+        font-size: 31px;
+        line-height: 1.25;
+        color: var(--fg);
+      }
+      .hosts {
+        margin: 26px 0 0;
+        font-family: var(--mono);
+        font-size: 17px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--comment);
+      }
+      .hosts b {
+        font-weight: 500;
+        color: var(--fg2);
+      }
+      .chat {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .kicker {
+        font-family: var(--mono);
+        font-size: 16px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin: 0 0 10px 4px;
+      }
+      .before .kicker {
+        color: var(--comment);
+      }
+      .after .kicker {
+        color: var(--gold);
+      }
+      .msg {
+        display: grid;
+        grid-template-columns: 46px 1fr;
+        gap: 16px;
+        padding: 20px 24px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      .before .msg {
+        opacity: 0.82;
+      }
+      .after .msg {
+        border: 2px solid var(--gold);
+        box-shadow:
+          0 0 0 5px rgba(240, 196, 110, 0.1),
+          0 18px 40px rgba(0, 0, 0, 0.45);
+      }
+      .avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-family: var(--mono);
+        font-size: 22px;
+        color: var(--night);
+        background: #9ece6a;
+      }
+      .who {
+        font-size: 18px;
+        color: var(--fg2);
+        margin-bottom: 4px;
+      }
+      .who b {
+        font-weight: 400;
+        color: var(--fg);
+        margin-right: 8px;
+      }
+      .text {
+        font-size: 24px;
+        line-height: 1.35;
+        color: var(--fg);
+      }
+      .text a {
+        color: var(--blue);
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+        text-decoration-color: rgba(122, 162, 247, 0.55);
+      }
+      .before .text a {
+        font-size: 21px;
+        word-break: break-all;
+      }
+      .after .text a {
+        font-family: var(--mono);
+        font-size: 24px;
+      }
+      .press {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 18px 0 18px 70px;
+        font-family: var(--mono);
+        font-size: 17px;
+        color: var(--fg2);
+      }
+      kbd {
+        display: inline-block;
+        min-width: 44px;
+        padding: 6px 12px 8px;
+        border-radius: 9px;
+        font-family: var(--mono);
+        font-size: 18px;
+        text-align: center;
+        color: var(--gold-hi);
+        background: linear-gradient(180deg, #34488f, var(--navy-deep));
+        border: 2px solid var(--gold);
+        box-shadow: 0 3px 0 var(--gold-lo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="seam"></div>
+    <div class="wrap">
+      <div class="brand">
+        <img src="../../../assets/icon.svg" alt="" />
+        <h1 class="name">Cuff<span>Link</span></h1>
+        <p class="tagline">Off-the-cuff sharing,<br />buttoned-up links.</p>
+        <p class="hosts"><b>Jira</b> · <b>GitHub</b> · <b>GitLab</b></p>
+      </div>
+      <div class="chat">
+        <div class="before">
+          <div class="kicker">Before</div>
+          <div class="msg">
+            <div class="avatar">S</div>
+            <div>
+              <div class="who"><b>sam</b>10:42</div>
+              <div class="text">
+                Can you review this?<br /><a>https://github.com/octo-org/my-service/pull/42</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="press"><kbd>Alt</kbd>+<kbd>X</kbd><span>then paste</span></div>
+        <div class="after">
+          <div class="kicker">After</div>
+          <div class="msg">
+            <div class="avatar">S</div>
+            <div>
+              <div class="who"><b>sam</b>10:42</div>
+              <div class="text">
+                Can you review this?<br /><a>my-service#42 | Add retry to upload</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

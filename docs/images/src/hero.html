@@ -1,0 +1,252 @@
+<!doctype html>
+<!--
+  Source of the before and after image: docs/images/hero.png (README; 830 px wide, the README
+  width, at device scale 2) and docs/store/screenshot-1.png (Chrome Web Store; 800x500 at device
+  scale 1.6 gives 1280x800, and a 460 px or taller viewport adds the caption).
+  The messages and the shortcut row take the full width less the margins, so they fill the image.
+  Rebuild: see "Refresh the README and store images" in CONTRIBUTING.md.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CuffLink before and after</title>
+    <style>
+      @font-face {
+        font-family: 'cufflink Mono';
+        src: url('../../../public/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2');
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: 'cufflink Sans';
+        src: url('../../../public/fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');
+        font-weight: 400;
+      }
+      :root {
+        /* Tokyo Night, as in src/lib/theme.ts */
+        --night: #1a1b26;
+        --night-deep: #16161e;
+        --panel: #1f2335;
+        --border: #3b4261;
+        --fg: #c0caf5;
+        --fg2: #a9b1d6;
+        --comment: #565f89;
+        --blue: #7aa2f7;
+        /* Logo gold and navy, as in assets/icon.svg */
+        --gold: #f0c46e;
+        --gold-hi: #fff3cf;
+        --gold-lo: #c38a37;
+        --navy: #2b3f80;
+        --navy-deep: #1b2552;
+        --mono: 'cufflink Mono', ui-monospace, monospace;
+        --sans: 'cufflink Sans', system-ui, sans-serif;
+        /* Width of the cuff seam, and the margin on each side of the content. */
+        --seam: 16px;
+        --side: 26px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        background:
+          /* Shirting pinstripe: a faint diagonal weave. */
+          repeating-linear-gradient(135deg, rgba(122, 162, 247, 0.035) 0 1px, transparent 1px 12px),
+          radial-gradient(ellipse 70% 80% at 50% 55%, #20233a 0%, transparent 70%),
+          linear-gradient(180deg, var(--night) 0%, var(--night-deep) 100%);
+        color: var(--fg);
+        font-family: var(--sans);
+      }
+      /* A cuff seam along the left edge: a navy band with a gold stitch line. */
+      .seam {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: var(--seam);
+        background: linear-gradient(90deg, var(--navy-deep), var(--navy));
+      }
+      .seam::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 4px;
+        border-right: 2px dashed rgba(240, 196, 110, 0.55);
+      }
+      .caption {
+        display: none;
+        margin: 0 0 0 var(--seam);
+        text-align: center;
+        font-size: 29px;
+        line-height: 1.25;
+        color: var(--fg);
+      }
+      .caption b {
+        font-weight: 400;
+        background: linear-gradient(
+          135deg,
+          var(--gold-hi) 0%,
+          var(--gold) 40%,
+          var(--gold-lo) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      @media (min-height: 460px) {
+        .caption {
+          display: block;
+        }
+      }
+      .chat {
+        width: calc(100vw - var(--seam) - 2 * var(--side));
+        margin-left: var(--seam);
+      }
+      .kicker {
+        font-family: var(--mono);
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin: 0 0 7px 3px;
+      }
+      .before .kicker {
+        color: var(--comment);
+      }
+      .after .kicker {
+        color: var(--gold);
+      }
+      .msg {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 16px;
+        padding: 12px 20px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      .before .msg {
+        opacity: 0.85;
+      }
+      .after .msg {
+        border: 2px solid var(--gold);
+        box-shadow:
+          0 0 0 4px rgba(240, 196, 110, 0.1),
+          0 14px 32px rgba(0, 0, 0, 0.45);
+      }
+      .avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        font-family: var(--mono);
+        font-size: 22px;
+        color: var(--night);
+        background: #9ece6a;
+      }
+      .who {
+        font-size: 16px;
+        color: var(--fg2);
+      }
+      .who b {
+        font-weight: 400;
+        color: var(--fg);
+        margin-right: 8px;
+      }
+      .text {
+        font-size: 25px;
+        line-height: 1.36;
+        color: var(--fg);
+      }
+      .text a {
+        color: var(--blue);
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 4px;
+        text-decoration-color: rgba(122, 162, 247, 0.55);
+      }
+      .after .text a {
+        font-family: var(--mono);
+        font-size: 24px;
+      }
+      /* The shortcut row spans the width: a gold stitch line runs out from each side of the keys. */
+      .press {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 14px 0 12px;
+        font-family: var(--mono);
+        font-size: 16px;
+        color: var(--fg2);
+      }
+      .press::before,
+      .press::after {
+        content: '';
+        flex: 1;
+        border-top: 2px dashed rgba(240, 196, 110, 0.4);
+      }
+      .press::before {
+        margin-right: 8px;
+      }
+      .press::after {
+        margin-left: 8px;
+      }
+      kbd {
+        display: inline-block;
+        min-width: 40px;
+        padding: 4px 10px 6px;
+        border-radius: 7px;
+        font-family: var(--mono);
+        font-size: 16px;
+        text-align: center;
+        color: var(--gold-hi);
+        background: linear-gradient(180deg, #34488f, var(--navy-deep));
+        border: 2px solid var(--gold);
+        box-shadow: 0 3px 0 var(--gold-lo);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="seam"></div>
+    <p class="caption">
+      CuffLink <b>fastens</b> the key and title<br />to the links you copy with Alt+X.
+    </p>
+    <div class="chat">
+      <div class="before">
+        <div class="kicker">Before</div>
+        <div class="msg">
+          <div class="avatar">S</div>
+          <div>
+            <div class="who"><b>sam</b>10:42</div>
+            <div class="text">
+              Can you review this?<br /><a>https://github.com/octo-org/my-service/pull/42</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="press"><kbd>Alt</kbd>+<kbd>X</kbd><span>then paste</span></div>
+      <div class="after">
+        <div class="kicker">After</div>
+        <div class="msg">
+          <div class="avatar">S</div>
+          <div>
+            <div class="who"><b>sam</b>10:42</div>
+            <div class="text">
+              Can you review this?<br /><a>my-service#42 | Add retry to upload</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

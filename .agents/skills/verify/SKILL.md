@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Proves a change to Jira Link Copy works. Runs the full check and the format check, builds the extension, then runs the built copy script in a headless browser on made-up GitHub pull request, Jira and no-match pages and saves a screenshot of each result card. Use after a behavior change, before a release, or when asked to prove the copy works.
+description: Proves a change to CuffLink works. Runs the full check and the format check, builds the extension, then runs the built copy script in a headless browser on made-up GitHub pull request, Jira and no-match pages and saves a screenshot of each result card. Use after a behavior change, before a release, or when asked to prove the copy works.
 ---
 
 # verify
@@ -17,7 +17,7 @@ npm test               # lint, type coverage, unit tests, production build
 npm run format:check
 ```
 
-Both must exit 0. `npm test` leaves the build in `.output/chrome-mv3`.
+Both must exit 0. `npm test` leaves the build in `.output/chrome-mv3`. When the icon test fails after a logo SVG change, run `npm run icons` and commit the PNGs.
 
 ## 2. Manual load (optional)
 
@@ -33,7 +33,7 @@ The trick: serve made-up pages on a local port, and map a made-up host to that p
 
 ```sh
 REPO="$(git rev-parse --show-toplevel)"
-OUT="${TMPDIR:-/tmp}/jira-link-copy-verify-$(date +%Y%m%d-%H%M%S)"
+OUT="${TMPDIR:-/tmp}/cufflink-verify-$(date +%Y%m%d-%H%M%S)"
 SITE="$OUT/site"
 mkdir -p "$SITE/_ext" "$SITE/octo-org/my-service/pull/42" "$SITE/browse/ABC-123" "$SITE/about"
 cp -R "$REPO/.output/chrome-mv3/fonts" "$REPO/.output/chrome-mv3/copy-issue.js" "$SITE/_ext/"
@@ -66,10 +66,10 @@ Start the server in the background and stop it in Cleanup:
 python3 -m http.server 8765 --bind 127.0.0.1 --directory "<OUT>/site"
 ```
 
-Use a unique session name per run, for example `jlc-verify-<timestamp>`. A host on the reserved `.test` domain is safe to map:
+Use a unique session name per run, for example `cufflink-verify-<timestamp>`. A host on the reserved `.test` domain is safe to map:
 
 ```sh
-S=jlc-verify-<timestamp>
+S=cufflink-verify-<timestamp>
 agent-browser --session "$S" --args "--host-resolver-rules=MAP git.example.test 127.0.0.1:8765" set viewport 1280 640
 ```
 
@@ -80,22 +80,31 @@ copy_and_snap() { # copy_and_snap <url> <name>
   agent-browser --session "$S" open "$1"
   agent-browser --session "$S" eval "Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { write: (items) => { window.__copied = items.length; return Promise.resolve(); } } }); if (typeof ClipboardItem === 'undefined') { window.ClipboardItem = class { constructor(items) { this.items = items; } }; } window.chrome = window.chrome || {}; chrome.runtime = { getURL: (p) => '/_ext' + p }; document.head.append(Object.assign(document.createElement('script'), { src: '/_ext/copy-issue.js' })); 'ok'"
   agent-browser --session "$S" wait 700
-  agent-browser --session "$S" eval "(() => { const h = document.getElementById('jira-link-copy-root'); return h ? h.shadowRoot.querySelector('.card').innerText : 'no card'; })()"
+  agent-browser --session "$S" eval "(() => { const h = document.getElementById('cufflink-root'); return h ? h.shadowRoot.querySelector('.card').innerText : 'no card'; })()"
   agent-browser --session "$S" screenshot "<OUT>/$2.png"
 }
 ```
 
 The card stays for 2.8 seconds, so take the screenshot right after the wait.
 
-| #   | Scenario            | Command                                                                   | Pass when the card text is                                                                              |
-| --- | ------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| 1   | GitHub pull request | `copy_and_snap http://git.example.test/octo-org/my-service/pull/42 01-pr` | `COPIED`, `my-service#42 \| Add retry to upload`, `http://git.example.test/octo-org/my-service/pull/42` |
-| 2   | Jira issue          | `copy_and_snap http://git.example.test/browse/ABC-123 02-jira`            | `COPIED`, `ABC-123: Fix login timeout`, `http://git.example.test/browse/ABC-123`                        |
-| 3   | No match            | `copy_and_snap http://git.example.test/about 03-none`                     | `NOT FOUND`, `No issue, pull request or merge request on this page`                                     |
+| #   | Scenario            | Command                                                                   | Pass when the card text is                                                                                           |
+| --- | ------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 1   | GitHub pull request | `copy_and_snap http://git.example.test/octo-org/my-service/pull/42 01-pr` | `CUFFED TO CLIPBOARD`, `my-service#42 \| Add retry to upload`, `http://git.example.test/octo-org/my-service/pull/42` |
+| 2   | Jira issue          | `copy_and_snap http://git.example.test/browse/ABC-123 02-jira`            | `CUFFED TO CLIPBOARD`, `ABC-123: Fix login timeout`, `http://git.example.test/browse/ABC-123`                        |
+| 3   | No match            | `copy_and_snap http://git.example.test/about 03-none`                     | `NOTHING TO CUFF`, `No issue, pull request or merge request on this page`                                            |
 
 Check each screenshot by eye: the card shows in the bottom-right corner, dark on the dark page (scenario 1) and light on the light pages.
 
-Scenario 1 at 1280×640 is the README image. To refresh it, copy `<OUT>/01-pr.png` to `docs/images/copied-card.png`.
+### Refresh the README and store images
+
+The list of images, their source pages and viewports is in [CONTRIBUTING.md](../../../CONTRIBUTING.md#refresh-the-readme-and-store-images), section "Refresh the README and store images". For the card images, copy the fuller made-up pages from `docs/images/src/` over the fixtures, set the viewport from that table (a device scale goes third: `set viewport 640 360 2`), then run scenario 1 or 2 again with the image path as the output:
+
+```sh
+cp "$REPO/docs/images/src/pr-page.html" "$SITE/octo-org/my-service/pull/42/index.html"
+cp "$REPO/docs/images/src/jira-page.html" "$SITE/browse/ABC-123/index.html"
+```
+
+The first screenshot after a viewport change can miss the card. Read each image and shoot again when the card is not in it.
 
 ## Cleanup
 
