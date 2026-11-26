@@ -15,15 +15,15 @@
   <a href="https://github.com/joboyx/cufflink/releases/latest"><img src="https://img.shields.io/github/v/release/joboyx/cufflink" alt="Latest release"></a>
 </p>
 
-![The CuffLink logo and name with the tagline "Off-the-cuff sharing, buttoned-up links." and the hosts Jira, GitHub and GitLab. Next to it, two chat messages from "sam" that say "Can you review this?". The message marked BEFORE holds the bare URL "https://github.com/octo-org/my-service/pull/42". Between them are the keys Alt + X and "then paste". The message marked AFTER holds the link "my-service#42 | Add retry to upload".](docs/images/hero.png)
+![Two chat messages from "sam" that say "Can you review this?". The message marked BEFORE holds the bare URL "https://github.com/octo-org/my-service/pull/42". Between them are the keys Alt + X and "then paste". The message marked AFTER holds the link "my-service#42 | Add retry to upload".](docs/images/hero.png)
 
 ## Why
 
 A bare URL turns up to the meeting in pyjamas. Nobody knows what it is until they open it.
 
-A pasted URL shows no issue key and no title, so readers must open it to know what it is. Typing a link with a key and a title by hand is slow. CuffLink copies the link, the key and the title with one shortcut. It copies rich text for apps that keep links, and plain text for apps that do not.
+Typing a link with its key and title by hand is slow. CuffLink does it with one shortcut. It copies rich text for apps that keep links, and plain text for apps that do not.
 
-![A dark pull request page titled "Add retry to upload #42" in the made-up repo octo-org/my-service. In the bottom-right corner, a card reads "CUFFED TO CLIPBOARD", then "my-service#42 | Add retry to upload", then the URL "http://git.example.test/octo-org/my-service/pull/42".](docs/images/copied-card.png)
+![A dark pull request page titled "Add retry to upload #42" in the made-up repo octo-org/my-service. Over the page, a card reads "CUFFED TO CLIPBOARD", then "my-service#42 | Add retry to upload", then the URL "http://git.example.test/octo-org/my-service/pull/42".](docs/images/copied-card.png)
 
 ## What it copies
 
@@ -51,7 +51,7 @@ Paste as plain text:
 
 After each copy, a card in the bottom-right corner shows the result. It uses the Tokyo Night colors on a dark page and Tokyo Day on a light page.
 
-![A light issue page for the made-up issue ABC-123 "Fix login timeout". In the bottom-right corner, a light card reads "CUFFED TO CLIPBOARD", then "ABC-123: Fix login timeout", then the URL "http://git.example.test/browse/ABC-123".](docs/images/copied-card-jira.png)
+![A light issue page for the made-up issue ABC-123 "Fix login timeout". Over the grey activity area at the bottom, a light card reads "CUFFED TO CLIPBOARD", then "ABC-123: Fix login timeout", then the URL "http://git.example.test/browse/ABC-123".](docs/images/copied-card-jira.png)
 
 ## Install
 
