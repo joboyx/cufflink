@@ -75,7 +75,7 @@ The extension injects a script into the active tab when you copy. It does not re
 - **Active tab only, on request.** The extension acts only on the active tab, and only when you press the shortcut or click the toolbar icon.
 - **Title fallback.** The title comes from the page heading. When the page has no heading yet, the title comes from the tab title. When the tab title has no usable title, the label is only the key, such as `ABC-123`.
 - **No group-level GitLab work items.** A work item at the group level (`/groups/<group>/-/work_items/42`, such as an epic) is not supported.
-- **No match.** On a page with no issue, pull request or merge request, the card shows `Not found`.
+- **No match.** On a page with no issue, pull request or merge request, the card shows `Nothing to cuff`.
 - **Browser pages.** Chrome does not let an extension run on its own pages, such as `chrome://` pages. There, the toolbar icon shows a red `!` badge for 2 seconds.
 
 ## Develop

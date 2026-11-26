@@ -9,7 +9,7 @@ import { showToast } from '../src/lib/toast';
 
 const success = {
   kind: 'success',
-  kicker: 'Copied',
+  kicker: 'Cuffed to clipboard',
   title: 'ABC-123: Example summary',
   body: 'https://<host>/browse/ABC-123',
 } as const;
@@ -98,7 +98,7 @@ describe('showToast', () => {
   it('renders kicker, title and body text', () => {
     showToast(success);
 
-    expect(card().querySelector('.kicker')?.textContent).toBe('Copied');
+    expect(card().querySelector('.kicker')?.textContent).toBe('Cuffed to clipboard');
     expect(card().querySelector('.title')?.textContent).toBe('ABC-123: Example summary');
     expect(card().querySelector('.body')?.textContent).toBe('https://<host>/browse/ABC-123');
   });
@@ -113,10 +113,10 @@ describe('showToast', () => {
 
   it('replaces the previous card', () => {
     showToast(success);
-    showToast({ kind: 'error', kicker: 'Not found', title: 'No issue' });
+    showToast({ kind: 'error', kicker: 'Nothing to cuff', title: 'No issue' });
 
     expect(document.querySelectorAll('#jira-link-copy-root')).toHaveLength(1);
-    expect(card().querySelector('.kicker')?.textContent).toBe('Not found');
+    expect(card().querySelector('.kicker')?.textContent).toBe('Nothing to cuff');
   });
 
   it('removes the host after 2800 ms', () => {

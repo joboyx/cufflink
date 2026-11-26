@@ -12,7 +12,7 @@ export async function copyCurrentLink(): Promise<void> {
   if (!link) {
     showToast({
       kind: 'error',
-      kicker: 'Not found',
+      kicker: 'Nothing to cuff',
       title: 'No issue, pull request or merge request on this page',
       body: 'Open an issue, a pull request or a merge request, or select a card on a board.',
     });
@@ -32,7 +32,7 @@ export async function copyCurrentLink(): Promise<void> {
 
   showToast({
     kind: 'success',
-    kicker: 'Copied',
+    kicker: 'Cuffed to clipboard',
     title: formatLinkLabel(link),
     body: link.url,
   });

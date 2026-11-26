@@ -87,11 +87,11 @@ copy_and_snap() { # copy_and_snap <url> <name>
 
 The card stays for 2.8 seconds, so take the screenshot right after the wait.
 
-| #   | Scenario            | Command                                                                   | Pass when the card text is                                                                              |
-| --- | ------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| 1   | GitHub pull request | `copy_and_snap http://git.example.test/octo-org/my-service/pull/42 01-pr` | `COPIED`, `my-service#42 \| Add retry to upload`, `http://git.example.test/octo-org/my-service/pull/42` |
-| 2   | Jira issue          | `copy_and_snap http://git.example.test/browse/ABC-123 02-jira`            | `COPIED`, `ABC-123: Fix login timeout`, `http://git.example.test/browse/ABC-123`                        |
-| 3   | No match            | `copy_and_snap http://git.example.test/about 03-none`                     | `NOT FOUND`, `No issue, pull request or merge request on this page`                                     |
+| #   | Scenario            | Command                                                                   | Pass when the card text is                                                                                           |
+| --- | ------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 1   | GitHub pull request | `copy_and_snap http://git.example.test/octo-org/my-service/pull/42 01-pr` | `CUFFED TO CLIPBOARD`, `my-service#42 \| Add retry to upload`, `http://git.example.test/octo-org/my-service/pull/42` |
+| 2   | Jira issue          | `copy_and_snap http://git.example.test/browse/ABC-123 02-jira`            | `CUFFED TO CLIPBOARD`, `ABC-123: Fix login timeout`, `http://git.example.test/browse/ABC-123`                        |
+| 3   | No match            | `copy_and_snap http://git.example.test/about 03-none`                     | `NOTHING TO CUFF`, `No issue, pull request or merge request on this page`                                            |
 
 Check each screenshot by eye: the card shows in the bottom-right corner, dark on the dark page (scenario 1) and light on the light pages.
 

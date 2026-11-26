@@ -47,7 +47,7 @@ Run from the repo root.
 - The copied URL is the canonical page: `/browse/<key>` for Jira; the overview URL without tab, query or anchor for a code host.
 - The title comes from the page heading, else from the tab title without the site suffix. A blank title gives a label with only the prefix.
 - A group-level GitLab work item (`/groups/<group>/-/work_items/<iid>`) is not matched.
-- No match: the card shows `Not found`. A failed clipboard write: `Copy failed`. A tab where Chrome blocks injection: a red `!` badge on the icon for 2 seconds.
+- Card text (`src/lib/run-copy.ts`): a copy shows the kicker `Cuffed to clipboard`, the label and the URL. No match: kicker `Nothing to cuff`, title `No issue, pull request or merge request on this page`. A failed clipboard write: kicker `Copy failed`, title `Could not write to the clipboard`. Puns stay in the kickers only; error text stays plain. A tab where Chrome blocks injection: a red `!` badge on the icon for 2 seconds.
 - The clipboard gets `text/html` and `text/plain`. Without `ClipboardItem`, a plain-text fallback runs.
 - Permissions stay `activeTab`, `scripting` and `clipboardWrite`. Do not add host permissions.
 
