@@ -1,13 +1,13 @@
 <!doctype html>
 <!--
-  Source of docs/images/hero.png (1280x640, also the GitHub social preview).
-  Rebuild: serve the repo root over HTTP, open /docs/images/src/hero.html at a 1280x640 viewport,
-  and save a screenshot as docs/images/hero.png.
+  Source of the before and after image: docs/images/hero.png (1280x560, README) and
+  docs/store/screenshot-1.png (1280x800, Chrome Web Store; a 700 px or taller viewport adds the caption).
+  Rebuild: see "Refresh the README and store images" in CONTRIBUTING.md.
 -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>CuffLink hero</title>
+    <title>CuffLink before and after</title>
     <style>
       @font-face {
         font-family: 'CL Mono';
@@ -29,7 +29,6 @@
         --fg2: #a9b1d6;
         --comment: #565f89;
         --blue: #7aa2f7;
-        --red: #f7768e;
         /* Logo gold and navy, as in assets/icon.svg */
         --gold: #f0c46e;
         --gold-hi: #fff3cf;
@@ -45,16 +44,21 @@
       html,
       body {
         margin: 0;
-        width: 1280px;
-        height: 640px;
+        width: 100vw;
+        height: 100vh;
         overflow: hidden;
       }
       body {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 44px;
         background:
           /* Shirting pinstripe: a faint diagonal weave. */
           repeating-linear-gradient(135deg, rgba(122, 162, 247, 0.035) 0 1px, transparent 1px 14px),
-          radial-gradient(ellipse 70% 90% at 22% 50%, #20233a 0%, transparent 70%),
+          radial-gradient(ellipse 60% 80% at 50% 55%, #20233a 0%, transparent 70%),
           linear-gradient(180deg, var(--night) 0%, var(--night-deep) 100%);
         color: var(--fg);
         font-family: var(--sans);
@@ -74,32 +78,16 @@
         right: 6px;
         border-right: 2px dashed rgba(240, 196, 110, 0.55);
       }
-      .wrap {
-        position: absolute;
-        inset: 0 0 0 22px;
-        display: grid;
-        grid-template-columns: 470px 1fr;
-        align-items: center;
-        gap: 40px;
-        padding: 0 64px 0 58px;
-      }
-      .brand img {
-        width: 132px;
-        height: 132px;
-        display: block;
-        margin: 0 0 18px -10px;
-        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.45));
-      }
-      .name {
+      .caption {
+        display: none;
         margin: 0;
-        font-family: var(--mono);
-        font-weight: 500;
-        font-size: 78px;
-        line-height: 1;
-        letter-spacing: -0.03em;
+        text-align: center;
+        font-size: 40px;
+        line-height: 1.25;
         color: var(--fg);
       }
-      .name span {
+      .caption b {
+        font-weight: 400;
         background: linear-gradient(
           135deg,
           var(--gold-hi) 0%,
@@ -110,32 +98,18 @@
         background-clip: text;
         color: transparent;
       }
-      .tagline {
-        margin: 22px 0 0;
-        font-size: 31px;
-        line-height: 1.25;
-        color: var(--fg);
-      }
-      .hosts {
-        margin: 26px 0 0;
-        font-family: var(--mono);
-        font-size: 17px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--comment);
-      }
-      .hosts b {
-        font-weight: 500;
-        color: var(--fg2);
+      @media (min-height: 700px) {
+        .caption {
+          display: block;
+        }
       }
       .chat {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
+        width: 940px;
+        margin-left: 22px;
       }
       .kicker {
         font-family: var(--mono);
-        font-size: 16px;
+        font-size: 20px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         margin: 0 0 10px 4px;
@@ -148,15 +122,15 @@
       }
       .msg {
         display: grid;
-        grid-template-columns: 46px 1fr;
-        gap: 16px;
-        padding: 20px 24px;
+        grid-template-columns: 52px 1fr;
+        gap: 18px;
+        padding: 18px 26px;
         background: var(--panel);
         border: 1px solid var(--border);
         border-radius: 12px;
       }
       .before .msg {
-        opacity: 0.82;
+        opacity: 0.85;
       }
       .after .msg {
         border: 2px solid var(--gold);
@@ -165,28 +139,27 @@
           0 18px 40px rgba(0, 0, 0, 0.45);
       }
       .avatar {
-        width: 46px;
-        height: 46px;
+        width: 52px;
+        height: 52px;
         border-radius: 10px;
         display: grid;
         place-items: center;
         font-family: var(--mono);
-        font-size: 22px;
+        font-size: 26px;
         color: var(--night);
         background: #9ece6a;
       }
       .who {
-        font-size: 18px;
+        font-size: 21px;
         color: var(--fg2);
-        margin-bottom: 4px;
       }
       .who b {
         font-weight: 400;
         color: var(--fg);
-        margin-right: 8px;
+        margin-right: 10px;
       }
       .text {
-        font-size: 24px;
+        font-size: 29px;
         line-height: 1.35;
         color: var(--fg);
       }
@@ -194,33 +167,28 @@
         color: var(--blue);
         text-decoration: underline;
         text-decoration-thickness: 2px;
-        text-underline-offset: 4px;
+        text-underline-offset: 5px;
         text-decoration-color: rgba(122, 162, 247, 0.55);
-      }
-      .before .text a {
-        font-size: 21px;
-        word-break: break-all;
       }
       .after .text a {
         font-family: var(--mono);
-        font-size: 24px;
       }
       .press {
         display: flex;
         align-items: center;
         gap: 14px;
-        margin: 18px 0 18px 70px;
+        margin: 16px 0 16px 74px;
         font-family: var(--mono);
-        font-size: 17px;
+        font-size: 21px;
         color: var(--fg2);
       }
       kbd {
         display: inline-block;
-        min-width: 44px;
-        padding: 6px 12px 8px;
+        min-width: 50px;
+        padding: 6px 13px 8px;
         border-radius: 9px;
         font-family: var(--mono);
-        font-size: 18px;
+        font-size: 21px;
         text-align: center;
         color: var(--gold-hi);
         background: linear-gradient(180deg, #34488f, var(--navy-deep));
@@ -231,36 +199,29 @@
   </head>
   <body>
     <div class="seam"></div>
-    <div class="wrap">
-      <div class="brand">
-        <img src="../../../assets/icon.svg" alt="" />
-        <h1 class="name">Cuff<span>Link</span></h1>
-        <p class="tagline">Off-the-cuff sharing,<br />buttoned-up links.</p>
-        <p class="hosts"><b>Jira</b> · <b>GitHub</b> · <b>GitLab</b></p>
-      </div>
-      <div class="chat">
-        <div class="before">
-          <div class="kicker">Before</div>
-          <div class="msg">
-            <div class="avatar">S</div>
-            <div>
-              <div class="who"><b>sam</b>10:42</div>
-              <div class="text">
-                Can you review this?<br /><a>https://github.com/octo-org/my-service/pull/42</a>
-              </div>
+    <p class="caption">CuffLink <b>fastens</b> the key and title<br />to every link you copy.</p>
+    <div class="chat">
+      <div class="before">
+        <div class="kicker">Before</div>
+        <div class="msg">
+          <div class="avatar">S</div>
+          <div>
+            <div class="who"><b>sam</b>10:42</div>
+            <div class="text">
+              Can you review this?<br /><a>https://github.com/octo-org/my-service/pull/42</a>
             </div>
           </div>
         </div>
-        <div class="press"><kbd>Alt</kbd>+<kbd>X</kbd><span>then paste</span></div>
-        <div class="after">
-          <div class="kicker">After</div>
-          <div class="msg">
-            <div class="avatar">S</div>
-            <div>
-              <div class="who"><b>sam</b>10:42</div>
-              <div class="text">
-                Can you review this?<br /><a>my-service#42 | Add retry to upload</a>
-              </div>
+      </div>
+      <div class="press"><kbd>Alt</kbd>+<kbd>X</kbd><span>then paste</span></div>
+      <div class="after">
+        <div class="kicker">After</div>
+        <div class="msg">
+          <div class="avatar">S</div>
+          <div>
+            <div class="who"><b>sam</b>10:42</div>
+            <div class="text">
+              Can you review this?<br /><a>my-service#42 | Add retry to upload</a>
             </div>
           </div>
         </div>
