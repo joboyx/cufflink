@@ -49,7 +49,7 @@ A normal paste gives the label as a link, for chat, docs and mail apps that keep
 Features:
 - Works on github.com, GitHub Enterprise, gitlab.com, self-managed GitLab and Jira, on any host.
 - Copies the clean overview URL, without the tab, query or anchor. On a Jira board, it copies the issue URL of the selected card.
-- Keeps the key and cuts a long title at 100 characters.
+- Keeps the key and cuts a long label at 100 characters.
 - Shows a small card with the result, in dark or light colors to match the page.
 
 Privacy: CuffLink runs only on the active tab, and only when you press the shortcut or click the icon. It does not collect, store or send any data. It has no access to any site until you use it.
