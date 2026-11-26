@@ -17,7 +17,8 @@ CuffLink is a Chrome MV3 extension, built with WXT and TypeScript. When you pres
 | `src/lib/fonts.ts`                  | Loads the bundled fonts from extension bytes                                                             |
 | `test/`                             | Jest unit tests (jsdom), one file per module                                                             |
 | `assets/icon.svg`, `icon-small.svg` | Logo sources: the full logo, and the simpler drawing for 16 and 32 px                                    |
-| `public/icon/`, `public/fonts/`     | Icons (rendered by `scripts/generate-icons.mjs`) and fonts with OFL license files                        |
+| `public/icon/`, `public/fonts/`     | Icons (rendered by `npm run icons`) and fonts with OFL license files                                     |
+| `scripts/render-icons.cjs`          | Icon render code, shared by `scripts/generate-icons.mjs` and `test/icons.test.ts`                        |
 | `docs/images/`                      | README images and the GitHub social preview; HTML sources in `docs/images/src/` (steps: CONTRIBUTING.md) |
 | `docs/store/`                       | Chrome Web Store listing text and images                                                                 |
 | `.github/workflows/`                | `ci.yml` (tests), `tag-release.yml` and `release.yml` (releases)                                         |
@@ -37,7 +38,7 @@ Run from the repo root.
 | Production build                        | `npm run build` → `.output/chrome-mv3`                      |
 | Watch build                             | `npm start`                                                 |
 | Chrome zip                              | `npm run zip` → `.output/cufflink-<version>-chrome.zip`     |
-| Icons from the SVG logo                 | `node scripts/generate-icons.mjs`                           |
+| Icons from the SVG logo                 | `npm run icons`                                             |
 | Load in Chrome                          | `chrome://extensions` → Developer mode → Load unpacked      |
 | Prove the change in a real page         | Repo skill `verify`                                         |
 | Release (normally automatic on a merge) | Repo skill `release`                                        |
@@ -51,7 +52,7 @@ Run from the repo root.
 - The title comes from the page heading, else from the tab title without the site suffix. A blank title gives a label with only the prefix.
 - A group-level GitLab work item (`/groups/<group>/-/work_items/<iid>`) is not matched.
 - Card text (`src/lib/run-copy.ts`): a copy shows the kicker `Cuffed to clipboard`, the label and the URL. No match: kicker `Nothing to cuff`, title `No issue, pull request or merge request on this page`. A failed clipboard write: kicker `Copy failed`, title `Could not write to the clipboard`. Puns stay in the kickers only; error text stays plain. A tab where Chrome blocks injection: a red `!` badge on the icon for 2 seconds.
-- Icons: `scripts/generate-icons.mjs` renders the SVGs with `@resvg/resvg-js`. `public/icon/16.png` and `32.png` come from `assets/icon-small.svg` (larger links that fill the square, a navy band of at least 2 px at 16 px, a larger slot, a see-through gap where the links cross, no gloss, no slot bevel); `48.png` and `128.png` come from `assets/icon.svg`. After an SVG change, run the script, check each PNG by eye on a light and a dark toolbar, and commit the PNGs.
+- Icons: `npm run icons` renders the SVGs with `@resvg/resvg-js` (code in `scripts/render-icons.cjs`). `public/icon/16.png` and `32.png` come from `assets/icon-small.svg` (larger links whose tips reach into the corners, a navy band of at least 2 px at 16 px, a larger slot, a see-through gap where the links cross, a cream outline and a brighter rim and enamel for dark toolbars, no gloss, no slot bevel); `48.png` and `128.png` come from `assets/icon.svg`. After an SVG change, run `npm run icons`, check each PNG by eye on a light and a dark toolbar, and commit the PNGs. `test/icons.test.ts` fails when a committed PNG does not match a fresh render.
 - The clipboard gets `text/html` and `text/plain`. Without `ClipboardItem`, a plain-text fallback runs.
 - Permissions stay `activeTab`, `scripting` and `clipboardWrite`. Do not add host permissions.
 
