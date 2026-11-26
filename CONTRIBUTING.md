@@ -96,9 +96,11 @@ The headless check in `.agents/skills/verify/SKILL.md` has the exact commands fo
 
 | Image                              | Source page, served at                            | Viewport                  |
 | ---------------------------------- | ------------------------------------------------- | ------------------------- |
-| `docs/images/copied-card.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 640×360 at device scale 2 |
+| `docs/images/copied-card.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 640×400 at device scale 2 |
 | `docs/images/copied-card-jira.png` | `jira-page.html` at `/browse/ABC-123/`            | 640×360 at device scale 2 |
-| `docs/store/screenshot-2.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 1280×800                  |
+| `docs/store/screenshot-2.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 640×400 at device scale 2 |
+
+Check that the card sits over empty page area and that no text line is cut at an edge of the image.
 
 ## Pull requests
 
