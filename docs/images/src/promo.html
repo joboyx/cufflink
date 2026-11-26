@@ -1,0 +1,98 @@
+<!doctype html>
+<!--
+  Source of docs/store/promo-440x280.png (Chrome Web Store small promo tile).
+  Rebuild: serve the repo root over HTTP, open /docs/images/src/promo.html at a 440x280 viewport,
+  and save a screenshot as docs/store/promo-440x280.png.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CuffLink promo tile</title>
+    <style>
+      @font-face {
+        font-family: 'CL Mono';
+        src: url('../../../public/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2');
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: 'CL Sans';
+        src: url('../../../public/fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');
+        font-weight: 400;
+      }
+      :root {
+        --night: #1a1b26;
+        --night-deep: #16161e;
+        --fg: #c0caf5;
+        --gold: #f0c46e;
+        --gold-hi: #fff3cf;
+        --gold-lo: #c38a37;
+        --navy: #2b3f80;
+        --navy-deep: #1b2552;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 440px;
+        height: 280px;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background:
+          repeating-linear-gradient(135deg, rgba(122, 162, 247, 0.04) 0 1px, transparent 1px 10px),
+          radial-gradient(ellipse 60% 70% at 50% 40%, #232742 0%, transparent 70%),
+          linear-gradient(180deg, var(--night) 0%, var(--night-deep) 100%);
+        color: var(--fg);
+        font-family: 'CL Sans', system-ui, sans-serif;
+      }
+      /* Cuff seam along the bottom edge. */
+      body::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 14px;
+        background: linear-gradient(180deg, var(--navy), var(--navy-deep));
+        border-top: 2px dashed rgba(240, 196, 110, 0.55);
+      }
+      img {
+        width: 84px;
+        height: 84px;
+        filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+      }
+      h1 {
+        margin: 4px 0 0;
+        font-family: 'CL Mono', ui-monospace, monospace;
+        font-weight: 500;
+        font-size: 50px;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      h1 span {
+        background: linear-gradient(
+          135deg,
+          var(--gold-hi) 0%,
+          var(--gold) 40%,
+          var(--gold-lo) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      p {
+        margin: 12px 0 10px;
+        font-size: 19px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="../../../assets/icon.svg" alt="" />
+    <h1>Cuff<span>Link</span></h1>
+    <p>Off-the-cuff sharing, buttoned-up links.</p>
+  </body>
+</html>
