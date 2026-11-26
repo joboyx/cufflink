@@ -97,20 +97,14 @@ Check each screenshot by eye: the card shows in the bottom-right corner, dark on
 
 ### Refresh the README and store images
 
-The card images use fuller made-up pages from `docs/images/src/`. Copy them over the fixtures, then run the scenarios again:
+The list of images, their source pages and viewports is in [CONTRIBUTING.md](../../../CONTRIBUTING.md#refresh-the-readme-and-store-images), section "Refresh the README and store images". For the card images, copy the fuller made-up pages from `docs/images/src/` over the fixtures, set the viewport from that table (a device scale goes third: `set viewport 640 360 2`), then run scenario 1 or 2 again with the image path as the output:
 
 ```sh
 cp "$REPO/docs/images/src/pr-page.html" "$SITE/octo-org/my-service/pull/42/index.html"
 cp "$REPO/docs/images/src/jira-page.html" "$SITE/browse/ABC-123/index.html"
 ```
 
-| Image                              | Viewport | Scenario                |
-| ---------------------------------- | -------- | ----------------------- |
-| `docs/images/copied-card.png`      | 1280×640 | 1 (GitHub pull request) |
-| `docs/images/copied-card-jira.png` | 960×480  | 2 (Jira issue)          |
-| `docs/store/screenshot-1.png`      | 1280×800 | 1 (GitHub pull request) |
-
-`docs/images/hero.png` (1280×640) and `docs/store/promo-440x280.png` (440×280) have no card. Serve the repo root over HTTP, open `docs/images/src/hero.html` or `promo.html` at that viewport, and save a screenshot. The pages load the logo from `assets/` and the fonts from `public/fonts/`.
+The first screenshot after a viewport change can miss the card. Read each image and shoot again when the card is not in it.
 
 ## Cleanup
 

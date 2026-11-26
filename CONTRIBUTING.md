@@ -70,6 +70,35 @@ Every change adds or updates unit tests in `test/`. `npm test` must pass before 
 
 Use made-up names in tests, fixtures and docs (`ABC-123`, `octo-org/my-service`, `group/project`, `example.com`). Do not paste real URLs or titles from your company.
 
+## Refresh the README and store images
+
+The image sources are HTML pages in `docs/images/src/`. Take each screenshot in a Chromium browser at the viewport in the tables, and check every image by eye before you commit it. Chrome screenshots are RGB PNG files with no alpha channel, as the Chrome Web Store requires.
+
+Images without a card: serve the repo root over HTTP (for example `python3 -m http.server 8765`), so that the pages can load the logo from `assets/` and the fonts from `public/fonts/`. Then open the page and save a screenshot.
+
+| Image                            | Source page           | Viewport                  | Used for                                                                            |
+| -------------------------------- | --------------------- | ------------------------- | ----------------------------------------------------------------------------------- |
+| `docs/images/hero.png`           | `hero.html`           | 1280×560                  | README before and after image                                                       |
+| `docs/store/screenshot-1.png`    | `hero.html`           | 1280×800 (adds a caption) | Chrome Web Store screenshot 1                                                       |
+| `docs/images/social-preview.png` | `social-preview.html` | 1280×640                  | GitHub social preview; upload it by hand in the repository settings, Social preview |
+| `docs/store/promo-440x280.png`   | `promo.html`          | 440×280                   | Chrome Web Store small promo tile                                                   |
+
+Images with a card: the card must come from the built copy script.
+
+1. Run `npm run build`.
+2. Serve a folder that holds the page at its made-up path, and `copy-issue.js` and `fonts/` from `.output/chrome-mv3/` in `_ext/`.
+3. Start Chromium with `--host-resolver-rules="MAP git.example.test 127.0.0.1:<port>"` and open the page at `http://git.example.test/<path>`.
+4. In the page, stub `navigator.clipboard.write` and `chrome.runtime.getURL` (it returns `/_ext` plus the path), then add `/_ext/copy-issue.js` as a script.
+5. Take the screenshot while the card shows (2.8 seconds).
+
+The headless check in `.agents/skills/verify/SKILL.md` has the exact commands for steps 2 to 5.
+
+| Image                              | Source page, served at                            | Viewport                  |
+| ---------------------------------- | ------------------------------------------------- | ------------------------- |
+| `docs/images/copied-card.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 640×360 at device scale 2 |
+| `docs/images/copied-card-jira.png` | `jira-page.html` at `/browse/ABC-123/`            | 640×360 at device scale 2 |
+| `docs/store/screenshot-2.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 1280×800                  |
+
 ## Pull requests
 
 - Use [Conventional Commits](https://www.conventionalcommits.org/) with a scope, for example `fix(gitlab): keep the work item segment`.

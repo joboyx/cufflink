@@ -4,25 +4,25 @@ CuffLink is a Chrome MV3 extension, built with WXT and TypeScript. When you pres
 
 ## Layout
 
-| Path                                | Content                                                                           |
-| ----------------------------------- | --------------------------------------------------------------------------------- |
-| `wxt.config.ts`                     | Manifest: name, permissions, shortcut, icons                                      |
-| `src/entrypoints/background.ts`     | On the shortcut or icon click, injects `copy-issue.js` into the active tab        |
-| `src/entrypoints/copy-issue.ts`     | Injected script; calls `copyCurrentLink`                                          |
-| `src/lib/run-copy.ts`               | Detect, copy, show the card (wiring only; no unit tests)                          |
-| `src/lib/detect-*.ts`               | One detector per page type; `detect-copy-link.ts` picks the order                 |
-| `src/lib/format-link.ts`            | Label, plain text and HTML of a `CopyLink`                                        |
-| `src/lib/clipboard.ts`              | Clipboard write with a plain-text fallback                                        |
-| `src/lib/toast.ts`, `theme.ts`      | Result card and its dark or light colors                                          |
-| `src/lib/fonts.ts`                  | Loads the bundled fonts from extension bytes                                      |
-| `test/`                             | Jest unit tests (jsdom), one file per module                                      |
-| `assets/icon.svg`, `icon-small.svg` | Logo sources: the full logo, and the simpler drawing for 16 and 32 px             |
-| `public/icon/`, `public/fonts/`     | Icons (rendered by `scripts/generate-icons.mjs`) and fonts with OFL license files |
-| `docs/images/`                      | README hero image and card screenshot; HTML sources in `docs/images/src/`         |
-| `docs/store/`                       | Chrome Web Store listing text and images                                          |
-| `.github/workflows/`                | `ci.yml` (tests), `tag-release.yml` and `release.yml` (releases)                  |
-| `.agents/skills/`                   | Repo skills `verify` and `release` (`.claude/skills` links here)                  |
-| `.output/chrome-mv3/`               | Build output to load unpacked; git-ignored                                        |
+| Path                                | Content                                                                                                  |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `wxt.config.ts`                     | Manifest: name, permissions, shortcut, icons                                                             |
+| `src/entrypoints/background.ts`     | On the shortcut or icon click, injects `copy-issue.js` into the active tab                               |
+| `src/entrypoints/copy-issue.ts`     | Injected script; calls `copyCurrentLink`                                                                 |
+| `src/lib/run-copy.ts`               | Detect, copy, show the card (wiring only; no unit tests)                                                 |
+| `src/lib/detect-*.ts`               | One detector per page type; `detect-copy-link.ts` picks the order                                        |
+| `src/lib/format-link.ts`            | Label, plain text and HTML of a `CopyLink`                                                               |
+| `src/lib/clipboard.ts`              | Clipboard write with a plain-text fallback                                                               |
+| `src/lib/toast.ts`, `theme.ts`      | Result card and its dark or light colors                                                                 |
+| `src/lib/fonts.ts`                  | Loads the bundled fonts from extension bytes                                                             |
+| `test/`                             | Jest unit tests (jsdom), one file per module                                                             |
+| `assets/icon.svg`, `icon-small.svg` | Logo sources: the full logo, and the simpler drawing for 16 and 32 px                                    |
+| `public/icon/`, `public/fonts/`     | Icons (rendered by `scripts/generate-icons.mjs`) and fonts with OFL license files                        |
+| `docs/images/`                      | README images and the GitHub social preview; HTML sources in `docs/images/src/` (steps: CONTRIBUTING.md) |
+| `docs/store/`                       | Chrome Web Store listing text and images                                                                 |
+| `.github/workflows/`                | `ci.yml` (tests), `tag-release.yml` and `release.yml` (releases)                                         |
+| `.agents/skills/`                   | Repo skills `verify` and `release` (`.claude/skills` links here)                                         |
+| `.output/chrome-mv3/`               | Build output to load unpacked; git-ignored                                                               |
 
 ## Commands
 
