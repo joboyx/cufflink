@@ -10,13 +10,6 @@ export function parseUrl(pageUrl: string): URL | null {
 }
 
 /**
- * Collapses each run of white space to one space and trims the ends.
- */
-export function collapseSpace(text: string): string {
-  return text.replace(/\s+/g, ' ').trim();
-}
-
-/**
  * Reads a page title from the first heading that has text, else from the tab title.
  * `fromTabTitle` gets `document.title` and returns the title without the site suffix,
  * or a blank string when the tab title has no usable title.
@@ -33,4 +26,9 @@ export function headingOrTabTitle(
     }
   }
   return collapseSpace(fromTabTitle(doc.title));
+}
+
+// Collapses each run of white space to one space and trims the ends.
+function collapseSpace(text: string): string {
+  return text.replace(/\s+/g, ' ').trim();
 }

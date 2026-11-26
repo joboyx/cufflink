@@ -2,8 +2,10 @@ import { CODE_HOST_SEPARATOR, type CopyLink } from './format-link';
 import { headingOrTabTitle, parseUrl } from './read-page';
 
 // Match the path, not the host, so self-managed GitLab works too. gitlab.com opens
-// an issue as a work item, so both path segments are issue pages.
-const ISSUE_PATH_PATTERN = /^\/(.+?)\/-\/(issues|work_items)\/(\d+)(?:\/|$)/;
+// an issue as a work item, so both path segments are issue pages. A group-level
+// work item (`/groups/<group>/-/work_items/<iid>`, such as an epic) is not a project
+// issue, and a `<group>#<iid>` label would name a different item.
+const ISSUE_PATH_PATTERN = /^\/(?!groups\/)(.+?)\/-\/(issues|work_items)\/(\d+)(?:\/|$)/;
 
 const TITLE_SELECTORS = ['h1[data-testid="work-item-title"]', 'h1[data-testid="title-content"]'];
 

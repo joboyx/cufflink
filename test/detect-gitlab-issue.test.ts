@@ -87,6 +87,7 @@ describe('detectGitLabIssue', () => {
     'https://gitlab.com/group/project/-/merge_requests/5',
     'https://gitlab.com/group/project/-/issues',
     'https://gitlab.com/group/project',
+    'https://gitlab.com/groups/my-group/-/work_items/12',
     'https://github.com/octo-org/my-service/issues/5',
     'https://jira.example.com/browse/ABC-123',
     'not a url',
