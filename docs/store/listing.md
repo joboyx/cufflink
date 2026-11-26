@@ -19,7 +19,7 @@ Upload the screenshots in this order. All are RGB PNG files with no alpha channe
 | Slot             | File                           | Size     | Content                                                                                  |
 | ---------------- | ------------------------------ | -------- | ---------------------------------------------------------------------------------------- |
 | Screenshot 1     | `docs/store/screenshot-1.png`  | 1280×800 | Before and after: a bare URL in a chat, then Alt+X, then the link with its key and title |
-| Screenshot 2     | `docs/store/screenshot-2.png`  | 1280×800 | The result card on a made-up pull request page                                           |
+| Screenshot 2     | `docs/store/screenshot-2.png`  | 1280×800 | The light result card on a made-up Jira issue page: "ABC-123: Fix login timeout"         |
 | Small promo tile | `docs/store/promo-440x280.png` | 440×280  | Logo, name and tagline                                                                   |
 
 ### Summary
