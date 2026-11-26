@@ -1,0 +1,73 @@
+name: Bug report
+description: Report a wrong copied link or another problem with Jira Link Copy.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. For a security problem, use the security policy instead.
+
+        **Do not paste private URLs, issue keys or titles from your company.** Replace them with made-up values, such as `https://jira.example.com/browse/ABC-123` or `octo-org/my-service`.
+  - type: dropdown
+    id: page-type
+    attributes:
+      label: Page type
+      description: Where did you press the shortcut or click the icon?
+      options:
+        - Jira issue page
+        - Jira board
+        - GitHub pull request
+        - GitHub issue
+        - GitLab merge request
+        - GitLab issue or work item
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: copied
+    attributes:
+      label: What was copied
+      description: Paste as plain text, and say what the result card showed. Use made-up values.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open https://git.example.com/octo-org/my-service/pull/42\n2. Press Alt+X\n3. Paste into ..."
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Extension version
+      description: Shown on `chrome://extensions`.
+      placeholder: 0.4.0
+    validations:
+      required: true
+  - type: input
+    id: chrome
+    attributes:
+      label: Chrome version
+      description: Shown on `chrome://version`.
+      placeholder: '130.0.0.0'
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Windows, macOS, Linux, ChromeOS]
+  - type: textarea
+    id: notes
+    attributes:
+      label: Other details
+      description: Anything else, such as a self-managed host or a custom theme. Remove private data.
