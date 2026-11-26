@@ -73,34 +73,70 @@ Use made-up names in tests, fixtures and docs (`ABC-123`, `octo-org/my-service`,
 
 ## Refresh the README and store images
 
-The image sources are HTML pages in `docs/images/src/`. Take each screenshot in a Chromium browser at the viewport in the tables, and check every image by eye before you commit it. Chrome screenshots are RGB PNG files with no alpha channel, as the Chrome Web Store requires.
+The image sources are HTML pages in `docs/images/src/`. Take each screenshot in Chrome at the viewport and device scale in the tables, and check every image by eye before you commit it. Chrome screenshots are RGB PNG files with no alpha channel, as the Chrome Web Store requires.
 
-Images without a card: serve the repo root over HTTP (for example `python3 -m http.server 8765`), so that the pages can load the logo from `assets/` and the fonts from `public/fonts/`. Then open the page and save a screenshot.
+To shoot a page in Chrome:
 
-| Image                            | Source page           | Viewport                  | Used for                                                                            |
-| -------------------------------- | --------------------- | ------------------------- | ----------------------------------------------------------------------------------- |
-| `docs/images/hero.png`           | `hero.html`           | 1280×560                  | README before and after image                                                       |
-| `docs/store/screenshot-1.png`    | `hero.html`           | 1280×800 (adds a caption) | Chrome Web Store screenshot 1                                                       |
-| `docs/images/social-preview.png` | `social-preview.html` | 1280×640                  | GitHub social preview; upload it by hand in the repository settings, Social preview |
-| `docs/store/promo-440x280.png`   | `promo.html`          | 440×280                   | Chrome Web Store small promo tile                                                   |
+1. Open DevTools and turn on the device toolbar (Ctrl+Shift+M, or Cmd+Shift+M on macOS).
+2. Choose Responsive, then type the width and the height. Set the device pixel ratio (DPR) to the device scale. When the DPR field does not show, add it from the toolbar's more-options menu. For a DPR that the list does not have, such as 1.6, add a custom device in DevTools Settings, Devices.
+3. Open the command menu (Ctrl+Shift+P, or Cmd+Shift+P) and run "Capture screenshot".
 
-Images with a card: the card must come from the built copy script.
+### Images without a card
 
-1. Run `npm run build`.
-2. Serve a folder that holds the page at its made-up path, and `copy-issue.js` and `fonts/` from `.output/chrome-mv3/` in `_ext/`.
-3. Start Chromium with `--host-resolver-rules="MAP git.example.test 127.0.0.1:<port>"` and open the page at `http://git.example.test/<path>`.
-4. In the page, stub `navigator.clipboard.write` and `chrome.runtime.getURL` (it returns `/_ext` plus the path), then add `/_ext/copy-issue.js` as a script.
-5. Take the screenshot while the card shows (2.8 seconds).
+Serve the repo root over HTTP (for example `python3 -m http.server 8765`), so that the pages can load the logo from `assets/` and the fonts from `public/fonts/`. Then open `http://localhost:8765/docs/images/src/<page>` and shoot it.
 
-The headless check in `.agents/skills/verify/SKILL.md` has the exact commands for steps 2 to 5.
+| Image                            | Source page           | Viewport, device scale          | Used for                                                                            |
+| -------------------------------- | --------------------- | ------------------------------- | ----------------------------------------------------------------------------------- |
+| `docs/images/hero.png`           | `hero.html`           | 830×400 at 2 (the README width) | README before and after image                                                       |
+| `docs/store/screenshot-1.png`    | `hero.html`           | 800×500 at 1.6 (adds a caption) | Chrome Web Store screenshot 1                                                       |
+| `docs/images/social-preview.png` | `social-preview.html` | 1280×640 at 1                   | GitHub social preview; upload it by hand in the repository settings, Social preview |
+| `docs/store/promo-440x280.png`   | `promo.html`          | 440×280 at 1                    | Chrome Web Store small promo tile                                                   |
 
-| Image                              | Source page, served at                            | Viewport                  |
-| ---------------------------------- | ------------------------------------------------- | ------------------------- |
-| `docs/images/copied-card.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 640×400 at device scale 2 |
-| `docs/images/copied-card-jira.png` | `jira-page.html` at `/browse/ABC-123/`            | 640×360 at device scale 2 |
-| `docs/store/screenshot-2.png`      | `pr-page.html` at `/octo-org/my-service/pull/42/` | 640×400 at device scale 2 |
+### Images with a card
 
-Check that the card sits over empty page area and that no text line is cut at an edge of the image.
+The card must come from the built copy script. A plain `http` page has no clipboard, so you stub it in the page and then load the script.
+
+1. Build, and put the made-up pages and the built script in a new folder:
+
+   ```bash
+   npm run build
+   SITE="$(mktemp -d)"
+   mkdir -p "$SITE/_ext" "$SITE/octo-org/my-service/pull/42" "$SITE/browse/ABC-123"
+   cp -R .output/chrome-mv3/copy-issue.js .output/chrome-mv3/fonts "$SITE/_ext/"
+   cp docs/images/src/pr-page.html "$SITE/octo-org/my-service/pull/42/index.html"
+   cp docs/images/src/jira-page.html "$SITE/browse/ABC-123/index.html"
+   python3 -m http.server 8765 --directory "$SITE"
+   ```
+
+2. Start a separate Chrome with an empty profile and a made-up host mapped to the server, so that the card shows a clean URL. On macOS, the Chrome binary is `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
+
+   ```bash
+   google-chrome --user-data-dir="$(mktemp -d)" --host-resolver-rules="MAP git.example.test 127.0.0.1:8765"
+   ```
+
+3. Open the page at its path on `http://git.example.test/` and set the viewport from the table.
+4. In the DevTools console, run this code. It stubs the clipboard and the extension URL, keeps the card on screen until the next reload, and loads the script:
+
+   ```js
+   Object.defineProperty(navigator, 'clipboard', { value: { write: () => Promise.resolve() } });
+   window.ClipboardItem ??= class {};
+   window.chrome = window.chrome || {};
+   chrome.runtime = { getURL: (p) => '/_ext' + p };
+   window.setTimeout = () => 0;
+   document.head.append(
+     Object.assign(document.createElement('script'), { src: '/_ext/copy-issue.js' }),
+   );
+   ```
+
+5. Capture the screenshot as above.
+
+| Image                              | Page URL path                  | Viewport, device scale | Card         |
+| ---------------------------------- | ------------------------------ | ---------------------- | ------------ |
+| `docs/images/copied-card.png`      | `/octo-org/my-service/pull/42` | 640×400 at 2           | Dark, GitHub |
+| `docs/images/copied-card-jira.png` | `/browse/ABC-123`              | 640×360 at 2           | Light, Jira  |
+| `docs/store/screenshot-2.png`      | `/browse/ABC-123`              | 640×400 at 2           | Light, Jira  |
+
+Check that the card sits over empty page area and that no text line is cut at an edge of the image. For an automated, headless run of the same steps, see the repo skill `.agents/skills/verify/SKILL.md`.
 
 ## Pull requests
 
