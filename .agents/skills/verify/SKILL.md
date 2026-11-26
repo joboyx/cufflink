@@ -17,7 +17,7 @@ npm test               # lint, type coverage, unit tests, production build
 npm run format:check
 ```
 
-Both must exit 0. `npm test` leaves the build in `.output/chrome-mv3`.
+Both must exit 0. `npm test` leaves the build in `.output/chrome-mv3`. When the icon test fails after a logo SVG change, run `npm run icons` and commit the PNGs.
 
 ## 2. Manual load (optional)
 

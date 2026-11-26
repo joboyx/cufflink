@@ -13,6 +13,7 @@
     "build": "wxt build",
     "clean": "rm -rf .output dist coverage .wxt",
     "fonts": "node scripts/copy-fonts.mjs",
+    "icons": "node scripts/generate-icons.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",

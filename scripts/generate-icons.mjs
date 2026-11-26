@@ -1,44 +1,19 @@
 /**
- * Renders the extension icons in `public/icon/` from the SVG logo in `assets/`.
+ * Writes the extension icons to `public/icon/` from the SVG logo in `assets/`.
  *
- * The 16 and 32 px toolbar icons come from `assets/icon-small.svg`, a simpler drawing with
- * larger links, a thicker navy band, a larger slot and a gap where the links cross, so that the
- * two links stay clear at toolbar size. The 48 and 128 px icons come from the full logo,
- * `assets/icon.svg`.
+ * The render code and the size → SVG map are in `scripts/render-icons.cjs`, which the icon
+ * test also uses to check that the committed PNGs match the SVGs.
  *
- * Run `node scripts/generate-icons.mjs` after a change to either SVG, and commit the PNGs.
+ * Run `npm run icons` after a change to either SVG, and commit the PNGs.
  */
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Resvg } from '@resvg/resvg-js';
+import { ICON_SOURCES, renderIconPng } from './render-icons.cjs';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ASSETS = join(ROOT, 'assets');
-const OUT_DIR = join(ROOT, 'public', 'icon');
-
-// Icon size in pixels → the SVG source that it renders from.
-const SOURCES = {
-  16: 'icon-small.svg',
-  32: 'icon-small.svg',
-  48: 'icon.svg',
-  128: 'icon.svg',
-};
-
-/**
- * Renders one SVG file to a square PNG.
- *
- * @param {string} file SVG file name in `assets/`.
- * @param {number} size Width and height of the PNG in pixels.
- * @returns {Buffer} The PNG bytes.
- */
-function renderPng(file, size) {
-  const svg = readFileSync(join(ASSETS, file), 'utf8');
-  const resvg = new Resvg(svg, { fitTo: { mode: 'width', value: size } });
-  return resvg.render().asPng();
-}
+const OUT_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'icon');
 
 mkdirSync(OUT_DIR, { recursive: true });
-for (const [size, file] of Object.entries(SOURCES)) {
-  writeFileSync(join(OUT_DIR, `${size}.png`), renderPng(file, Number(size)));
+for (const size of Object.keys(ICON_SOURCES)) {
+  writeFileSync(join(OUT_DIR, `${size}.png`), renderIconPng(Number(size)));
 }

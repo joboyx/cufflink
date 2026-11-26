@@ -33,6 +33,7 @@ To try your build in Chrome, run `npm run build`, open `chrome://extensions`, en
 | `npm run format:check`    | Check the format without changes                             |
 | `npm run zip`             | Pack a Chrome zip into `.output/`                            |
 | `npm run fonts`           | Copy the bundled fonts from `node_modules` to `public/fonts` |
+| `npm run icons`           | Render the icons in `public/icon` from the logo SVGs         |
 | `npm run clean`           | Remove build output and coverage                             |
 
 ## Code layout
@@ -59,10 +60,10 @@ To try your build in Chrome, run `npm run build`, open `chrome://extensions`, en
 | `test/load-document.ts`          | Test helper that loads an HTML string into the test document                |
 | `assets/`                        | Logo SVGs: `icon.svg` (48 and 128 px) and `icon-small.svg` (16 and 32 px)   |
 | `public/icon/`, `public/fonts/`  | Extension icons and bundled fonts with their licenses                       |
-| `scripts/`                       | Font copy and icon generation scripts                                       |
+| `scripts/`                       | Font copy and icon render scripts                                           |
 | `docs/images/`, `docs/store/`    | README images, Chrome Web Store listing; HTML sources in `docs/images/src/` |
 
-After you change a logo SVG, run `node scripts/generate-icons.mjs` and commit the PNGs in `public/icon/`.
+After you change a logo SVG, run `npm run icons` and commit the PNGs in `public/icon/`. The icon test fails when a committed PNG does not match a fresh render of its SVG.
 
 ## Test
 
