@@ -111,6 +111,20 @@ describe('showToast', () => {
     expect(styleText()).toMatch(/\.card-error \.kicker \{\s*color: var\(--cufflink-red\);/);
   });
 
+  it('wraps the error body to at most three lines and keeps the success body on one line', () => {
+    showToast({
+      kind: 'error',
+      kicker: 'Nothing to cuff',
+      title: 'No issue',
+      body: 'Open an issue, a pull request or a merge request, or select a card on a board.',
+    });
+
+    expect(styleText()).toMatch(/\.body \{[^}]*white-space: nowrap;/);
+    expect(styleText()).toMatch(
+      /\.card-error \.body \{[^}]*-webkit-line-clamp: 3;[^}]*white-space: normal;/,
+    );
+  });
+
   it('replaces the previous card', () => {
     showToast(success);
     showToast({ kind: 'error', kicker: 'Nothing to cuff', title: 'No issue' });

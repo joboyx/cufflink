@@ -127,6 +127,13 @@ function toastCss(theme: ThemeName): string {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    .card-error .body {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-height: 1.4;
+      white-space: normal;
+    }
     @keyframes rise {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
