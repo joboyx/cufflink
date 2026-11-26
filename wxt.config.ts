@@ -9,7 +9,7 @@ export default defineConfig({
     permissions: ['activeTab', 'scripting', 'clipboardWrite'],
     web_accessible_resources: [{ resources: ['fonts/*.woff2'], matches: ['<all_urls>'] }],
     action: {
-      default_title: 'CuffLink: copy a named link (Alt+X)',
+      default_title: 'CuffLink: copy a link with its key and title',
     },
     commands: {
       _execute_action: {
@@ -17,7 +17,8 @@ export default defineConfig({
           default: 'Alt+X',
           mac: 'Alt+X',
         },
-        description: 'Copy a named link to the issue, pull request or merge request',
+        description:
+          'Copy a link with its key and title to the issue, pull request or merge request',
       },
     },
     icons: {
