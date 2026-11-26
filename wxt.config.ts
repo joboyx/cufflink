@@ -4,11 +4,12 @@ export default defineConfig({
   srcDir: 'src',
   manifest: {
     name: 'Jira Link Copy',
-    description: 'Copy a formatted Jira issue or GitLab merge request link from the current tab.',
+    description:
+      'Copy a formatted link to a Jira issue, a GitHub pull request or issue, or a GitLab merge request or issue from the current tab.',
     permissions: ['activeTab', 'scripting', 'clipboardWrite'],
     web_accessible_resources: [{ resources: ['fonts/*.woff2'], matches: ['<all_urls>'] }],
     action: {
-      default_title: 'Copy Jira issue or merge request link',
+      default_title: 'Copy issue, pull request or merge request link',
     },
     commands: {
       _execute_action: {
@@ -16,7 +17,7 @@ export default defineConfig({
           default: 'Alt+X',
           mac: 'Alt+X',
         },
-        description: 'Copy Jira issue or merge request link',
+        description: 'Copy issue, pull request or merge request link',
       },
     },
     icons: {

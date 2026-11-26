@@ -1,9 +1,10 @@
-import { MERGE_REQUEST_SEPARATOR, type CopyLink } from './format-link';
+import { CODE_HOST_SEPARATOR, type CopyLink } from './format-link';
+import { headingOrTabTitle, parseUrl } from './read-page';
 
 // Match the path, not the host, so self-managed GitLab works too.
 const MERGE_REQUEST_PATH_PATTERN = /^\/(.+?)\/-\/merge_requests\/(\d+)(?:\/|$)/;
 
-const TITLE_SELECTOR = 'h1[data-testid="title-content"]';
+const TITLE_SELECTORS = ['h1[data-testid="title-content"]'];
 
 /**
  * Finds the GitLab merge request on a merge request page, on any tab of it.
@@ -27,7 +28,7 @@ export function detectGitLabMr(doc: Document, pageUrl: string): CopyLink | null 
     prefix: `${project}!${iid}`,
     title: titleFromDocument(doc, iid),
     url: `${url.origin}/${projectPath}/-/merge_requests/${iid}`,
-    separator: MERGE_REQUEST_SEPARATOR,
+    separator: CODE_HOST_SEPARATOR,
   };
 }
 
@@ -36,22 +37,6 @@ export function detectGitLabMr(doc: Document, pageUrl: string): CopyLink | null 
  * without its ` (!<iid>) · Merge requests · … · GitLab` suffix.
  */
 function titleFromDocument(doc: Document, iid: string): string {
-  const heading = collapse(doc.querySelector(TITLE_SELECTOR)?.textContent ?? '');
-  if (heading) {
-    return heading;
-  }
   const suffix = new RegExp(`\\s*\\(!${iid}\\)\\s+·\\s+Merge requests\\s+·.*$`);
-  return collapse(doc.title.replace(suffix, ''));
-}
-
-function parseUrl(pageUrl: string): URL | null {
-  try {
-    return new URL(pageUrl);
-  } catch {
-    return null;
-  }
-}
-
-function collapse(text: string): string {
-  return text.replace(/\s+/g, ' ').trim();
+  return headingOrTabTitle(doc, TITLE_SELECTORS, (tabTitle) => tabTitle.replace(suffix, ''));
 }

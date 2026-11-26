@@ -4,8 +4,8 @@ import { formatLinkLabel } from './format-link';
 import { showToast } from './toast';
 
 /**
- * Detects the Jira issue or GitLab merge request on this tab, copies a formatted
- * link, and shows a card.
+ * Detects the Jira issue, GitHub pull request or issue, or GitLab merge request or
+ * issue on this tab, copies a formatted link, and shows a card.
  */
 export async function copyCurrentLink(): Promise<void> {
   const link = detectCopyLink(document, location.href);
@@ -13,8 +13,8 @@ export async function copyCurrentLink(): Promise<void> {
     showToast({
       kind: 'error',
       kicker: 'Not found',
-      title: 'No Jira issue or merge request on this page',
-      body: 'Open an issue or a merge request, or select a card on a board.',
+      title: 'No issue, pull request or merge request on this page',
+      body: 'Open an issue, a pull request or a merge request, or select a card on a board.',
     });
     return;
   }
