@@ -1,6 +1,6 @@
 {
   "name": "cufflink",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "description": "Off-the-cuff sharing, buttoned-up links. Copy Jira, GitHub and GitLab links with their key and title, in one shortcut.",
   "type": "module",
