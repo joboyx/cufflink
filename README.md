@@ -6,7 +6,7 @@
 
 <p align="center"><strong>Off-the-cuff sharing, buttoned-up links.</strong></p>
 
-<p align="center">CuffLink fastens the key and title to every Jira, GitHub and GitLab link you copy, so the link says what it is before anyone clicks.</p>
+<p align="center">CuffLink fastens the key and title to the Jira, GitHub and GitLab links you copy with Alt+X, so the link says what it is before anyone clicks.</p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
