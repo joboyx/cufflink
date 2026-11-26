@@ -1,11 +1,13 @@
 import { escapeAttr, escapeHtml } from './escape';
 
 /**
- * A link to copy, from any source page (a Jira issue or a GitLab merge request).
+ * A link to copy, from any source page (a Jira issue, a GitHub pull request or issue,
+ * or a GitLab merge request or issue).
  */
 export interface CopyLink {
   /**
-   * Short id at the start of the label, never cut: `ABC-123` or `my-service!42`.
+   * Short id at the start of the label, never cut: `ABC-123`, `my-service!42` or
+   * `my-service#42`.
    */
   prefix: string;
   /**
@@ -17,7 +19,7 @@ export interface CopyLink {
    */
   url: string;
   /**
-   * Text between prefix and title: `JIRA_SEPARATOR` or `MERGE_REQUEST_SEPARATOR`.
+   * Text between prefix and title: `JIRA_SEPARATOR` or `CODE_HOST_SEPARATOR`.
    */
   separator: string;
 }
@@ -28,9 +30,10 @@ export interface CopyLink {
 export const JIRA_SEPARATOR = ': ';
 
 /**
- * Separator of a merge request label: `my-service!42 | Title`.
+ * Separator of a code host label (a merge request, a pull request or a GitHub or
+ * GitLab issue): `my-service!42 | Title` or `my-service#42 | Title`.
  */
-export const MERGE_REQUEST_SEPARATOR = ' | ';
+export const CODE_HOST_SEPARATOR = ' | ';
 
 /**
  * Most visible characters a copied link label may have, including the ellipsis.

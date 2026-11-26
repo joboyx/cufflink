@@ -1,6 +1,6 @@
 # Jira Link Copy
 
-Chrome extension that copies a formatted Jira issue or GitLab merge request link from the current tab.
+Chrome extension that copies a formatted link to a Jira issue, a GitHub pull request or issue, or a GitLab merge request or issue from the current tab.
 
 ## Install
 
@@ -18,9 +18,11 @@ Release page: https://github.com/joboyx/jira-link-copy/releases/latest
 ## What it copies
 
 - Rich text (normal paste): `ABC-123: Summary` as a link to `https://<host>/browse/ABC-123`
-- Rich text on a merge request: `my-service!42 | Title` as a link to `https://<host>/group/subgroup/my-service/-/merge_requests/42`
+- Rich text on a GitLab merge request: `my-service!42 | Title` as a link to `https://<host>/group/subgroup/my-service/-/merge_requests/42`
+- Rich text on a GitHub pull request or issue: `my-service#42 | Title` as a link to `https://<host>/octo-org/my-service/pull/42` or `.../issues/42`
+- Rich text on a GitLab issue: `my-service#42 | Title` as a link to `https://<host>/group/subgroup/my-service/-/issues/42` (or `.../-/work_items/42`)
 - Plain text (paste as plain text): the same label with no hyperlink
-- A label longer than 100 characters gets a cut title that ends with `…`. The `ABC-123` or `my-service!42` part is never cut, and the link target stays the full URL.
+- A label longer than 100 characters gets a cut title that ends with `…`. The `ABC-123`, `my-service!42` or `my-service#42` part is never cut, and the link target stays the full URL.
 
 Paste as plain text:
 
@@ -28,13 +30,16 @@ Paste as plain text:
 - macOS Cocoa apps: Option-Shift-Command-V (Paste and Match Style)
 - Google Docs and similar web apps: Command-Shift-V (paste without formatting)
 
-The extension reads the issue or merge request on:
+The extension reads the link on:
 
-- an issue page (`/browse/ABC-123`)
-- a board when a card is selected or focused
+- a Jira issue page (`/browse/ABC-123`)
+- a Jira board when a card is selected or focused
 - a GitLab merge request page, any tab (`/<project path>/-/merge_requests/42`), on gitlab.com or a self-managed host
+- a GitLab issue page (`/<project path>/-/issues/42` or `/-/work_items/42`), on gitlab.com or a self-managed host
+- a GitHub pull request page, any tab (`/<owner>/<repo>/pull/42`), on github.com or a GitHub Enterprise host
+- a GitHub issue page (`/<owner>/<repo>/issues/42`), on github.com or a GitHub Enterprise host
 
-The copied URL is always the browse URL for that issue, not the board URL. For a merge request it is the overview URL, without the tab, query or anchor.
+The copied URL is always the browse URL for a Jira issue, not the board URL. For a merge request, pull request or GitHub or GitLab issue it is the overview URL, without the tab, query or anchor.
 
 After each copy, a card in the bottom-right corner shows the result. It uses the Tokyo Night colors on a dark page and Tokyo Day on a light page.
 

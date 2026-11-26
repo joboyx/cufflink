@@ -1,7 +1,7 @@
 import {
   JIRA_SEPARATOR,
   MAX_LABEL_LENGTH,
-  MERGE_REQUEST_SEPARATOR,
+  CODE_HOST_SEPARATOR,
   formatHtml,
   formatLinkLabel,
   formatPlainText,
@@ -19,7 +19,7 @@ const mergeRequest = {
   prefix: 'my-service!42',
   title: 'Add retry to upload',
   url: 'https://gitlab.example.com/group/subgroup/my-service/-/merge_requests/42',
-  separator: MERGE_REQUEST_SEPARATOR,
+  separator: CODE_HOST_SEPARATOR,
 };
 
 describe('formatLinkLabel', () => {

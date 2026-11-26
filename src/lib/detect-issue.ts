@@ -1,5 +1,6 @@
 import { findIssueKey } from './issue-key';
 import { JIRA_SEPARATOR, type CopyLink } from './format-link';
+import { parseUrl } from './read-page';
 
 const BROWSE_PATH_PATTERN = /\/(?:jira\/)?browse\/([A-Z][A-Z0-9]+-\d+)/;
 const ISSUES_PATH_PATTERN = /\/issues\/([A-Z][A-Z0-9]+-\d+)/;
@@ -78,14 +79,6 @@ export function summaryFromDocument(doc: Document, key: string): string {
   }
 
   return stripKey(cleanDocumentTitle(doc.title), key);
-}
-
-function parseUrl(pageUrl: string): URL | null {
-  try {
-    return new URL(pageUrl);
-  } catch {
-    return null;
-  }
 }
 
 function keyFromSelectedCard(doc: Document): string | null {
