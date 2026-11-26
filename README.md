@@ -87,7 +87,7 @@ Click the toolbar icon to copy the same way.
 | `scripting`      | Inject the copy script into that tab                                     |
 | `clipboardWrite` | Write the link to the clipboard                                          |
 
-CuffLink does not request host access to any site.
+CuffLink does not request host access to any site. It collects, stores and sends no data; see the [privacy policy](PRIVACY.md).
 
 ## Limitations
 

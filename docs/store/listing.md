@@ -66,15 +66,31 @@ CuffLink copies a link to the issue, pull request or merge request on the active
 | `clipboardWrite`    | CuffLink writes the formatted link to the clipboard as rich text and plain text. This is the single purpose of the extension.                                                                                                 |
 | No host permissions | CuffLink requests no host permissions and no content scripts. `activeTab` gives access to one tab for one user action, which is all that a copy needs. It works on any Jira, GitHub or GitLab host without broad site access. |
 
-### Remote code
+### Are you using remote code?
+
+Answer: **No**.
 
 ```text
-No. All code is in the extension package.
+All code is bundled in the extension package. CuffLink loads no script, module or WebAssembly from outside the package and does not evaluate strings as code.
 ```
 
 ### Data usage
 
-CuffLink collects no user data. Tick no data type. Certify all three statements: no sale of data, no use outside the single purpose, no use for credit decisions.
+Tick no data type: CuffLink collects no user data. It reads the active tab only to make the link, writes the link to the clipboard and makes no network requests.
+
+Certify all three statements:
+
+- I do not sell or transfer user data to third parties, outside of the approved use cases.
+- I do not use or transfer user data for purposes that are unrelated to my item's single purpose.
+- I do not use or transfer user data to determine creditworthiness or for lending purposes.
+
+### Privacy policy URL
+
+```text
+https://github.com/joboyx/cufflink/blob/main/PRIVACY.md
+```
+
+The policy is [`PRIVACY.md`](../../PRIVACY.md) at the repo root.
 
 ## Rebuild the images
 
