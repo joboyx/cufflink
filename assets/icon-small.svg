@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <title>CuffLink</title>
+  <!-- Toolbar drawing for 16 and 32 px: the logo with a thicker rim, a larger slot, no gloss and no slot bevel. -->
+  <defs>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff3cf"/>
+      <stop offset="0.35" stop-color="#f0c46e"/>
+      <stop offset="0.7" stop-color="#c38a37"/>
+      <stop offset="1" stop-color="#8a5a1e"/>
+    </linearGradient>
+    <linearGradient id="enamel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a68c0"/>
+      <stop offset="0.55" stop-color="#2b3f80"/>
+      <stop offset="1" stop-color="#1b2552"/>
+    </linearGradient>
+    <!-- One link: a pill with a see-through slot. Local box 0..64 x 0..40. -->
+    <mask id="hole" maskUnits="userSpaceOnUse" x="-8" y="-8" width="80" height="56">
+      <rect x="-8" y="-8" width="80" height="56" fill="#fff"/>
+      <rect x="17" y="13" width="30" height="14" rx="7" fill="#000"/>
+    </mask>
+    <g id="link">
+      <g mask="url(#hole)">
+        <rect x="0" y="0" width="64" height="40" rx="20" fill="url(#rim)" stroke="#8a5a1e" stroke-width="2"/>
+        <rect x="8" y="8" width="48" height="24" rx="12" fill="url(#enamel)"/>
+      </g>
+    </g>
+    <!-- Top half of the overlap: the left link passes over the right link here. -->
+    <clipPath id="over"><rect x="38" y="-10" width="32" height="30"/></clipPath>
+  </defs>
+  <!-- Left link, right link, then the left link again inside the clip, so the two interlock. -->
+  <g transform="translate(64 64) rotate(-45) scale(1.4) translate(-53 -20)">
+    <use href="#link"/>
+    <use href="#link" x="42"/>
+    <g clip-path="url(#over)"><use href="#link"/></g>
+  </g>
+</svg>
