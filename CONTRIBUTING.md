@@ -7,8 +7,8 @@ Thank you for your help. Please read the [Code of Conduct](CODE_OF_CONDUCT.md) f
 You need Node 20 or newer. `.nvmrc` pins Node 22, the version CI uses.
 
 ```bash
-git clone https://github.com/joboyx/jira-link-copy.git
-cd jira-link-copy
+git clone https://github.com/joboyx/cufflink.git
+cd cufflink
 nvm use
 npm ci
 ```
@@ -37,28 +37,32 @@ To try your build in Chrome, run `npm run build`, open `chrome://extensions`, en
 
 ## Code layout
 
-| Path                             | Purpose                                                                    |
-| -------------------------------- | -------------------------------------------------------------------------- |
-| `src/entrypoints/background.ts`  | Runs the copy script in the active tab on the shortcut or the toolbar icon |
-| `src/entrypoints/copy-issue.ts`  | The script that the background injects; calls `copyCurrentLink`            |
-| `src/lib/run-copy.ts`            | Detect, copy and show the card                                             |
-| `src/lib/detect-copy-link.ts`    | Picks the detector for the page; code host pages go before Jira            |
-| `src/lib/detect-issue.ts`        | Jira issue page and board card                                             |
-| `src/lib/detect-github.ts`       | GitHub pull request and issue                                              |
-| `src/lib/detect-gitlab-mr.ts`    | GitLab merge request                                                       |
-| `src/lib/detect-gitlab-issue.ts` | GitLab issue and work item                                                 |
-| `src/lib/read-page.ts`           | URL parsing and the heading or tab title fallback                          |
-| `src/lib/issue-key.ts`           | Finds a Jira issue key in text                                             |
-| `src/lib/format-link.ts`         | Link label, plain text and HTML; the 100-character cut                     |
-| `src/lib/escape.ts`              | HTML escaping                                                              |
-| `src/lib/clipboard.ts`           | Writes rich and plain text to the clipboard                                |
-| `src/lib/toast.ts`               | The result card                                                            |
-| `src/lib/theme.ts`               | Dark or light card colors from the page                                    |
-| `src/lib/fonts.ts`               | Loads the bundled fonts for the card                                       |
-| `test/*.test.ts`                 | Jest unit tests, one file per module                                       |
-| `test/load-document.ts`          | Test helper that loads an HTML string into the test document               |
-| `public/icon/`, `public/fonts/`  | Extension icons and bundled fonts with their licenses                      |
-| `scripts/`                       | Font copy and icon generation scripts                                      |
+| Path                             | Purpose                                                                     |
+| -------------------------------- | --------------------------------------------------------------------------- |
+| `src/entrypoints/background.ts`  | Runs the copy script in the active tab on the shortcut or the toolbar icon  |
+| `src/entrypoints/copy-issue.ts`  | The script that the background injects; calls `copyCurrentLink`             |
+| `src/lib/run-copy.ts`            | Detect, copy and show the card                                              |
+| `src/lib/detect-copy-link.ts`    | Picks the detector for the page; code host pages go before Jira             |
+| `src/lib/detect-issue.ts`        | Jira issue page and board card                                              |
+| `src/lib/detect-github.ts`       | GitHub pull request and issue                                               |
+| `src/lib/detect-gitlab-mr.ts`    | GitLab merge request                                                        |
+| `src/lib/detect-gitlab-issue.ts` | GitLab issue and work item                                                  |
+| `src/lib/read-page.ts`           | URL parsing and the heading or tab title fallback                           |
+| `src/lib/issue-key.ts`           | Finds a Jira issue key in text                                              |
+| `src/lib/format-link.ts`         | Link label, plain text and HTML; the 100-character cut                      |
+| `src/lib/escape.ts`              | HTML escaping                                                               |
+| `src/lib/clipboard.ts`           | Writes rich and plain text to the clipboard                                 |
+| `src/lib/toast.ts`               | The result card                                                             |
+| `src/lib/theme.ts`               | Dark or light card colors from the page                                     |
+| `src/lib/fonts.ts`               | Loads the bundled fonts for the card                                        |
+| `test/*.test.ts`                 | Jest unit tests, one file per module                                        |
+| `test/load-document.ts`          | Test helper that loads an HTML string into the test document                |
+| `assets/`                        | Logo SVGs: `icon.svg` (48 and 128 px) and `icon-small.svg` (16 and 32 px)   |
+| `public/icon/`, `public/fonts/`  | Extension icons and bundled fonts with their licenses                       |
+| `scripts/`                       | Font copy and icon generation scripts                                       |
+| `docs/images/`, `docs/store/`    | README images, Chrome Web Store listing; HTML sources in `docs/images/src/` |
+
+After you change a logo SVG, run `node scripts/generate-icons.mjs` and commit the PNGs in `public/icon/`.
 
 ## Test
 

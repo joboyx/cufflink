@@ -1,8 +1,8 @@
 {
-  "name": "jira-link-copy",
+  "name": "cufflink",
   "version": "0.4.0",
   "private": true,
-  "description": "Copy a formatted link to a Jira issue, a GitHub pull request or issue, or a GitLab merge request or issue from the current tab.",
+  "description": "Off-the-cuff sharing, buttoned-up links. Copy Jira, GitHub and GitLab links with their key and title, in one shortcut.",
   "type": "module",
   "engines": {
     "node": ">=20"

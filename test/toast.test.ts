@@ -15,7 +15,7 @@ const success = {
 } as const;
 
 function host(): HTMLElement | null {
-  return document.getElementById('jira-link-copy-root');
+  return document.getElementById('cufflink-root');
 }
 
 function card(): HTMLElement {
@@ -115,7 +115,7 @@ describe('showToast', () => {
     showToast(success);
     showToast({ kind: 'error', kicker: 'Nothing to cuff', title: 'No issue' });
 
-    expect(document.querySelectorAll('#jira-link-copy-root')).toHaveLength(1);
+    expect(document.querySelectorAll('#cufflink-root')).toHaveLength(1);
     expect(card().querySelector('.kicker')?.textContent).toBe('Nothing to cuff');
   });
 

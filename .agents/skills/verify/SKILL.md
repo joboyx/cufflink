@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Proves a change to Jira Link Copy works. Runs the full check and the format check, builds the extension, then runs the built copy script in a headless browser on made-up GitHub pull request, Jira and no-match pages and saves a screenshot of each result card. Use after a behavior change, before a release, or when asked to prove the copy works.
+description: Proves a change to CuffLink works. Runs the full check and the format check, builds the extension, then runs the built copy script in a headless browser on made-up GitHub pull request, Jira and no-match pages and saves a screenshot of each result card. Use after a behavior change, before a release, or when asked to prove the copy works.
 ---
 
 # verify
@@ -33,7 +33,7 @@ The trick: serve made-up pages on a local port, and map a made-up host to that p
 
 ```sh
 REPO="$(git rev-parse --show-toplevel)"
-OUT="${TMPDIR:-/tmp}/jira-link-copy-verify-$(date +%Y%m%d-%H%M%S)"
+OUT="${TMPDIR:-/tmp}/cufflink-verify-$(date +%Y%m%d-%H%M%S)"
 SITE="$OUT/site"
 mkdir -p "$SITE/_ext" "$SITE/octo-org/my-service/pull/42" "$SITE/browse/ABC-123" "$SITE/about"
 cp -R "$REPO/.output/chrome-mv3/fonts" "$REPO/.output/chrome-mv3/copy-issue.js" "$SITE/_ext/"
@@ -66,10 +66,10 @@ Start the server in the background and stop it in Cleanup:
 python3 -m http.server 8765 --bind 127.0.0.1 --directory "<OUT>/site"
 ```
 
-Use a unique session name per run, for example `jlc-verify-<timestamp>`. A host on the reserved `.test` domain is safe to map:
+Use a unique session name per run, for example `cufflink-verify-<timestamp>`. A host on the reserved `.test` domain is safe to map:
 
 ```sh
-S=jlc-verify-<timestamp>
+S=cufflink-verify-<timestamp>
 agent-browser --session "$S" --args "--host-resolver-rules=MAP git.example.test 127.0.0.1:8765" set viewport 1280 640
 ```
 
@@ -80,7 +80,7 @@ copy_and_snap() { # copy_and_snap <url> <name>
   agent-browser --session "$S" open "$1"
   agent-browser --session "$S" eval "Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { write: (items) => { window.__copied = items.length; return Promise.resolve(); } } }); if (typeof ClipboardItem === 'undefined') { window.ClipboardItem = class { constructor(items) { this.items = items; } }; } window.chrome = window.chrome || {}; chrome.runtime = { getURL: (p) => '/_ext' + p }; document.head.append(Object.assign(document.createElement('script'), { src: '/_ext/copy-issue.js' })); 'ok'"
   agent-browser --session "$S" wait 700
-  agent-browser --session "$S" eval "(() => { const h = document.getElementById('jira-link-copy-root'); return h ? h.shadowRoot.querySelector('.card').innerText : 'no card'; })()"
+  agent-browser --session "$S" eval "(() => { const h = document.getElementById('cufflink-root'); return h ? h.shadowRoot.querySelector('.card').innerText : 'no card'; })()"
   agent-browser --session "$S" screenshot "<OUT>/$2.png"
 }
 ```

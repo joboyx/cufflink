@@ -1,7 +1,7 @@
 import { loadToastFonts, MONO_FAMILY, SANS_FAMILY } from './fonts';
 import { detectTheme, THEMES, type ThemeName, type ThemeTokens } from './theme';
 
-const ROOT_ID = 'jira-link-copy-root';
+const ROOT_ID = 'cufflink-root';
 
 const MONO_STACK = `"${MONO_FAMILY}", ui-monospace, "SF Mono", Menlo, monospace`;
 const SANS_STACK = `"${SANS_FAMILY}", system-ui, -apple-system, "Segoe UI", sans-serif`;

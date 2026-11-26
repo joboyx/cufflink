@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a wrong copied link or another problem with Jira Link Copy.
+description: Report a wrong copied link or another problem with CuffLink.
 labels: [bug]
 body:
   - type: markdown

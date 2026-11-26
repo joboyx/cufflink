@@ -3,13 +3,13 @@ import { defineConfig } from 'wxt';
 export default defineConfig({
   srcDir: 'src',
   manifest: {
-    name: 'Jira Link Copy',
+    name: 'CuffLink',
     description:
-      'Copy a formatted link to a Jira issue, a GitHub pull request or issue, or a GitLab merge request or issue from the current tab.',
+      'Off-the-cuff sharing, buttoned-up links. Copy Jira, GitHub and GitLab links with their key and title, in one shortcut.',
     permissions: ['activeTab', 'scripting', 'clipboardWrite'],
     web_accessible_resources: [{ resources: ['fonts/*.woff2'], matches: ['<all_urls>'] }],
     action: {
-      default_title: 'Copy issue, pull request or merge request link',
+      default_title: 'CuffLink: copy a named link (Alt+X)',
     },
     commands: {
       _execute_action: {
@@ -17,7 +17,7 @@ export default defineConfig({
           default: 'Alt+X',
           mac: 'Alt+X',
         },
-        description: 'Copy issue, pull request or merge request link',
+        description: 'Copy a named link to the issue, pull request or merge request',
       },
     },
     icons: {

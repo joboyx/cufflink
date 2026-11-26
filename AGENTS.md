@@ -1,26 +1,28 @@
-# Jira Link Copy
+# CuffLink
 
-Chrome MV3 extension, built with WXT and TypeScript. When you press the shortcut (Alt+X) or click the toolbar icon, it injects a script into the active tab. The script finds a Jira issue, a GitHub pull request or issue, or a GitLab merge request or issue on the page, copies a formatted link (rich HTML and plain text) to the clipboard, and shows a result card. User docs are in `README.md`; contributor docs are in `CONTRIBUTING.md`.
+CuffLink is a Chrome MV3 extension, built with WXT and TypeScript. When you press the shortcut (Alt+X) or click the toolbar icon, it injects a script into the active tab. The script finds a Jira issue, a GitHub pull request or issue, or a GitLab merge request or issue on the page, copies a formatted link (rich HTML and plain text) to the clipboard, and shows a result card. User docs are in `README.md`; contributor docs are in `CONTRIBUTING.md`.
 
 ## Layout
 
-| Path                            | Content                                                                    |
-| ------------------------------- | -------------------------------------------------------------------------- |
-| `wxt.config.ts`                 | Manifest: name, permissions, shortcut, icons                               |
-| `src/entrypoints/background.ts` | On the shortcut or icon click, injects `copy-issue.js` into the active tab |
-| `src/entrypoints/copy-issue.ts` | Injected script; calls `copyCurrentLink`                                   |
-| `src/lib/run-copy.ts`           | Detect, copy, show the card (wiring only; no unit tests)                   |
-| `src/lib/detect-*.ts`           | One detector per page type; `detect-copy-link.ts` picks the order          |
-| `src/lib/format-link.ts`        | Label, plain text and HTML of a `CopyLink`                                 |
-| `src/lib/clipboard.ts`          | Clipboard write with a plain-text fallback                                 |
-| `src/lib/toast.ts`, `theme.ts`  | Result card and its dark or light colors                                   |
-| `src/lib/fonts.ts`              | Loads the bundled fonts from extension bytes                               |
-| `test/`                         | Jest unit tests (jsdom), one file per module                               |
-| `public/icon/`, `public/fonts/` | Icons (from `scripts/generate-icons.mjs`) and fonts with OFL license files |
-| `docs/images/`                  | README screenshot                                                          |
-| `.github/workflows/`            | `ci.yml` (tests), `tag-release.yml` and `release.yml` (releases)           |
-| `.agents/skills/`               | Repo skills `verify` and `release` (`.claude/skills` links here)           |
-| `.output/chrome-mv3/`           | Build output to load unpacked; git-ignored                                 |
+| Path                                | Content                                                                           |
+| ----------------------------------- | --------------------------------------------------------------------------------- |
+| `wxt.config.ts`                     | Manifest: name, permissions, shortcut, icons                                      |
+| `src/entrypoints/background.ts`     | On the shortcut or icon click, injects `copy-issue.js` into the active tab        |
+| `src/entrypoints/copy-issue.ts`     | Injected script; calls `copyCurrentLink`                                          |
+| `src/lib/run-copy.ts`               | Detect, copy, show the card (wiring only; no unit tests)                          |
+| `src/lib/detect-*.ts`               | One detector per page type; `detect-copy-link.ts` picks the order                 |
+| `src/lib/format-link.ts`            | Label, plain text and HTML of a `CopyLink`                                        |
+| `src/lib/clipboard.ts`              | Clipboard write with a plain-text fallback                                        |
+| `src/lib/toast.ts`, `theme.ts`      | Result card and its dark or light colors                                          |
+| `src/lib/fonts.ts`                  | Loads the bundled fonts from extension bytes                                      |
+| `test/`                             | Jest unit tests (jsdom), one file per module                                      |
+| `assets/icon.svg`, `icon-small.svg` | Logo sources: the full logo, and the simpler drawing for 16 and 32 px             |
+| `public/icon/`, `public/fonts/`     | Icons (rendered by `scripts/generate-icons.mjs`) and fonts with OFL license files |
+| `docs/images/`                      | README hero image and card screenshot; HTML sources in `docs/images/src/`         |
+| `docs/store/`                       | Chrome Web Store listing text and images                                          |
+| `.github/workflows/`                | `ci.yml` (tests), `tag-release.yml` and `release.yml` (releases)                  |
+| `.agents/skills/`                   | Repo skills `verify` and `release` (`.claude/skills` links here)                  |
+| `.output/chrome-mv3/`               | Build output to load unpacked; git-ignored                                        |
 
 ## Commands
 
@@ -34,7 +36,8 @@ Run from the repo root.
 | Format check                            | `npm run format:check` (fix: `npm run format`)              |
 | Production build                        | `npm run build` → `.output/chrome-mv3`                      |
 | Watch build                             | `npm start`                                                 |
-| Chrome zip                              | `npm run zip`                                               |
+| Chrome zip                              | `npm run zip` → `.output/cufflink-<version>-chrome.zip`     |
+| Icons from the SVG logo                 | `node scripts/generate-icons.mjs`                           |
 | Load in Chrome                          | `chrome://extensions` → Developer mode → Load unpacked      |
 | Prove the change in a real page         | Repo skill `verify`                                         |
 | Release (normally automatic on a merge) | Repo skill `release`                                        |
@@ -48,6 +51,7 @@ Run from the repo root.
 - The title comes from the page heading, else from the tab title without the site suffix. A blank title gives a label with only the prefix.
 - A group-level GitLab work item (`/groups/<group>/-/work_items/<iid>`) is not matched.
 - Card text (`src/lib/run-copy.ts`): a copy shows the kicker `Cuffed to clipboard`, the label and the URL. No match: kicker `Nothing to cuff`, title `No issue, pull request or merge request on this page`. A failed clipboard write: kicker `Copy failed`, title `Could not write to the clipboard`. Puns stay in the kickers only; error text stays plain. A tab where Chrome blocks injection: a red `!` badge on the icon for 2 seconds.
+- Icons: `scripts/generate-icons.mjs` renders the SVGs with `@resvg/resvg-js`. `public/icon/16.png` and `32.png` come from `assets/icon-small.svg` (thicker rim, larger slot, no gloss, no slot bevel); `48.png` and `128.png` come from `assets/icon.svg`. After an SVG change, run the script, check each PNG by eye on a light and a dark toolbar, and commit the PNGs.
 - The clipboard gets `text/html` and `text/plain`. Without `ClipboardItem`, a plain-text fallback runs.
 - Permissions stay `activeTab`, `scripting` and `clipboardWrite`. Do not add host permissions.
 

@@ -61,7 +61,7 @@ representative at an online or offline event.
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement. To report,
 open a private security advisory on this repository
-(<https://github.com/joboyx/jira-link-copy/security/advisories/new>) or contact
+(<https://github.com/joboyx/cufflink/security/advisories/new>) or contact
 the maintainer through their GitHub profile. All complaints will be reviewed
 and investigated promptly and fairly.
 
