@@ -25,13 +25,29 @@
       </g>
       <rect x="20" y="15" width="24" height="10" rx="5" fill="none" stroke="#f0c46e" stroke-width="2.5"/>
     </g>
-    <!-- Top half of the overlap: the left link passes over the right link here. -->
-    <clipPath id="over"><rect x="38" y="-10" width="32" height="30"/></clipPath>
+    <!-- Top and bottom halves of the overlap. -->
+    <clipPath id="top"><rect x="38" y="-10" width="32" height="30"/></clipPath>
+    <clipPath id="bottom"><rect x="38" y="20" width="32" height="30"/></clipPath>
+    <!-- Top half: the left link passes over the right link, so cut a see-through gap in the right link. -->
+    <mask id="under-right" maskUnits="userSpaceOnUse" x="-12" y="-12" width="130" height="64">
+      <rect x="-12" y="-12" width="130" height="64" fill="#fff"/>
+      <g clip-path="url(#top)">
+        <rect x="0" y="0" width="64" height="40" rx="20" fill="#000" stroke="#000" stroke-width="7"/>
+        <rect x="20" y="15" width="24" height="10" rx="5" fill="#fff"/>
+      </g>
+    </mask>
+    <!-- Bottom half: the right link passes over the left link, so cut a see-through gap in the left link. -->
+    <mask id="under-left" maskUnits="userSpaceOnUse" x="-12" y="-12" width="130" height="64">
+      <rect x="-12" y="-12" width="130" height="64" fill="#fff"/>
+      <g clip-path="url(#bottom)">
+        <rect x="42" y="0" width="64" height="40" rx="20" fill="#000" stroke="#000" stroke-width="7"/>
+        <rect x="62" y="15" width="24" height="10" rx="5" fill="#fff"/>
+      </g>
+    </mask>
   </defs>
-  <!-- Left link, right link, then the left link again inside the clip, so the two interlock. -->
+  <!-- Each link gets a gap where the other link passes over it, so the two interlock. -->
   <g transform="translate(64 64) rotate(-45) scale(1.16) translate(-53 -20)">
-    <use href="#link"/>
-    <use href="#link" x="42"/>
-    <g clip-path="url(#over)"><use href="#link"/></g>
+    <g mask="url(#under-right)"><use href="#link" x="42"/></g>
+    <g mask="url(#under-left)"><use href="#link"/></g>
   </g>
 </svg>
