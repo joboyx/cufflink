@@ -4,13 +4,23 @@ Text and images for the Chrome Web Store item. Copy each field into the Develope
 
 ## Store listing
 
-| Field    | Value                                                                                       |
-| -------- | ------------------------------------------------------------------------------------------- |
-| Name     | CuffLink                                                                                    |
-| Category | Developer Tools                                                                             |
-| Language | English                                                                                     |
-| Icon     | `public/icon/128.png`                                                                       |
-| Images   | `docs/store/screenshot-1.png` (1280×800), `docs/store/promo-440x280.png` (small promo tile) |
+| Field    | Value                 |
+| -------- | --------------------- |
+| Name     | CuffLink              |
+| Category | Developer Tools       |
+| Language | English               |
+| Icon     | `public/icon/128.png` |
+| Images   | See [Images](#images) |
+
+### Images
+
+Upload the screenshots in this order. All are RGB PNG files with no alpha channel.
+
+| Slot             | File                           | Size     | Content                                                                                  |
+| ---------------- | ------------------------------ | -------- | ---------------------------------------------------------------------------------------- |
+| Screenshot 1     | `docs/store/screenshot-1.png`  | 1280×800 | Before and after: a bare URL in a chat, then Alt+X, then the link with its key and title |
+| Screenshot 2     | `docs/store/screenshot-2.png`  | 1280×800 | The result card on a made-up pull request page                                           |
+| Small promo tile | `docs/store/promo-440x280.png` | 440×280  | Logo, name and tagline                                                                   |
 
 ### Summary
 
@@ -63,7 +73,7 @@ CuffLink copies a link to the issue, pull request or merge request on the active
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `activeTab`         | CuffLink reads the URL, the heading and the title of the active tab, only after the user presses the shortcut or clicks the toolbar icon. It needs no access to any other tab.                                                |
 | `scripting`         | CuffLink injects its copy script into the active tab when the user asks for a copy. The script reads the page, writes the link to the clipboard and shows a result card.                                                      |
-| `clipboardWrite`    | CuffLink writes the formatted link to the clipboard as rich text and plain text. This is the single purpose of the extension.                                                                                                 |
+| `clipboardWrite`    | CuffLink writes the link with its key and title to the clipboard as rich text and plain text. This is the single purpose of the extension.                                                                                    |
 | No host permissions | CuffLink requests no host permissions and no content scripts. `activeTab` gives access to one tab for one user action, which is all that a copy needs. It works on any Jira, GitHub or GitLab host without broad site access. |
 
 ### Are you using remote code?
@@ -94,4 +104,4 @@ The policy is [`PRIVACY.md`](../../PRIVACY.md) at the repo root.
 
 ## Rebuild the images
 
-The image sources are in `docs/images/src/`. The steps are in `.agents/skills/verify/SKILL.md`, section "Refresh the README and store images".
+The image sources are in `docs/images/src/`. The steps are in [CONTRIBUTING.md](../../CONTRIBUTING.md#refresh-the-readme-and-store-images), section "Refresh the README and store images".
